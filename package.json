@@ -1,0 +1,44 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxtjs/gtm": "^2.4.0",
+    "@nuxtjs/i18n": "^9.3.1",
+    "@nuxtjs/tailwindcss": "^6.13.1",
+    "@vueuse/core": "^13.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dompurify": "^3.2.4",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-vue": "^8.5.2",
+    "firebase": "^11.4.0",
+    "lucide-vue-next": "^0.479.0",
+    "nuxt": "^3.16.0",
+    "nuxt-vuefire": "^1.0.5",
+    "primeicons": "^7.0.0",
+    "quill": "^2.0.3",
+    "reka-ui": "^2.0.2",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul-vue": "^0.4.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vuefire": "^3.2.1"
+  },
+  "devDependencies": {
+    "@iconify-json/mdi": "^1.2.3",
+    "@nuxt/icon": "^1.10.3",
+    "@nuxtjs/robots": "^5.2.6",
+    "@primevue/nuxt-module": "^4.3.1",
+    "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
+    "shadcn-nuxt": "^1.0.3"
+  }
+}
