@@ -41,6 +41,16 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  showDrawer: {
+    type: Boolean,
+    requiered: false,
+    default: true,
+  },
+  redirectLink: {
+    type: String,
+    required: false,
+    default: '',
+  }
 });
 
 const { product } = props;
@@ -48,7 +58,7 @@ const { product } = props;
 
 <template>
   <Card
-    class="w-full max-w-[280px] shadow-lg border border-gray-300 rounded-xl bg-white"
+    class="w-full max-w-[320px] shadow-lg border border-gray-300 rounded-xl bg-white"
   >
     <CardHeader
       class="h-48 bg-gray-100 flex items-center justify-center rounded-t-lg overflow-hidden"
@@ -61,7 +71,9 @@ const { product } = props;
     </CardHeader>
     <CardContent class="p-4 flex flex-col gap-2">
       <CardDescription class="flex flex-row items-center justify-between">
-        <Badge class="bg-gray-200 text-gray-700 rounded-md px-2 py-1 hover:bg-gray-200">
+        <Badge
+          class="bg-gray-200 text-gray-700 rounded-md px-2 py-1 hover:bg-gray-200"
+        >
           {{ product.category.name }}
         </Badge>
         <CardTitle
@@ -72,7 +84,7 @@ const { product } = props;
         {{ product.name }}
       </CardTitle>
     </CardContent>
-    <CardFooter class="flex justify-between p-4 w-full">
+    <CardFooter class="flex justify-between p-4 w-full" v-if="showDrawer">
       <Drawer v-model:open="isOpen">
         <DrawerTrigger as-child>
           <Button class="w-full" variant="outline"
@@ -80,7 +92,7 @@ const { product } = props;
           ></Button>
         </DrawerTrigger>
         <DrawerContent class="p-4">
-          <ProductDrawerContent :product="product"/>
+          <ProductDrawerContent :product="product" />
           <DrawerFooter>
             <DrawerClose as-child>
               <Button variant="outline">Закрити</Button>
@@ -88,6 +100,11 @@ const { product } = props;
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+    </CardFooter>
+    <CardFooter class="flex justify-between p-4 w-full" v-else>
+      <NuxtLink :to="redirectLink" class="w-full"><Button class="w-full" variant="outline"
+        >Детальніше <i class="pi pi-search"></i
+      ></Button></NuxtLink>
     </CardFooter>
   </Card>
 </template>

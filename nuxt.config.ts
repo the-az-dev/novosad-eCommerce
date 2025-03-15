@@ -1,6 +1,5 @@
 import type { NuxtPage } from "nuxt/schema";
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
     head: {
@@ -32,11 +31,14 @@ export default defineNuxtConfig({
       gtagId: "G-D023GRZM81",
     },
   },
-  site: { indexable: true },
+  site: {
+    indexable: true,
+    url: "http://novosad.pp.ua",
+    name: "Магазин 'Novosad'",
+  },
   compatibilityDate: "2024-11-01",
   devtools: {
     enabled: true,
-
     timeline: {
       enabled: true,
     },
@@ -50,15 +52,15 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@zadigetvoltaire/nuxt-gtm",
     "nuxt-vuefire",
+    "nuxt-simple-sitemap",
   ],
-  
   tailwindcss: {
     exposeConfig: true,
     viewer: true,
-    // and more...
   },
   robots: {
     disallow: [],
+    sitemap: "https://novosad.pp.ua/sitemap.xml",
   },
   gtm: {
     id: "GTM-PSNBGB7P",
@@ -84,6 +86,23 @@ export default defineNuxtConfig({
     defaultLocale: "uk",
     lazy: true,
     langDir: "locales/",
-    strategy: 'no_prefix',
+    strategy: "prefix",
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      redirectOn: "root",
+    },
+  },
+  sitemap: {
+    urls: [
+      "/about",
+      "/category",
+      "/contacts",
+      "/orders",
+      "/blog",
+      "/products",
+      "/blog/[id]",
+      "/products/[id]",
+    ].map((route) => ({ loc: route })),
   },
 });

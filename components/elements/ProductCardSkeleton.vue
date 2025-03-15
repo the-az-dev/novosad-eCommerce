@@ -14,7 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 <template>
   <Card
-    class="w-full max-w-[280px] shadow-lg border border-gray-300 rounded-xl bg-white"
+    class="w-full min-w-[280px] shadow-lg border border-gray-300 rounded-xl bg-white"
   >
     <CardHeader
       class="h-48 bg-gray-100 flex items-center justify-center rounded-t-lg overflow-hidden"
