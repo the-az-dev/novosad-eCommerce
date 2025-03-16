@@ -27,20 +27,20 @@ const description = computed(() => {
   <div
     class="flex flex-col items-center justify-center gap-4 w-full bg-white h-full max-h-3xl my-4 rounded-xl shadow-lg border p-6"
   >
-    <div class="flex flex-row items-start justify-between p-4 gap-4 w-full">
+    <div class="flex flex-row items-start justify-around p-4 gap-4 w-full">
       <img
         class="h-full w-full object-cover max-w-[30vh] max-h-[30vh] p-4"
         :src="product.photo_url"
         :alt="product.name + ' | Novosad'"
       />
       <div
-        class="flex flex-col justify-between w-full h-full max-w-6xl gap-4 p-4"
+        class="flex flex-col justify-between w-full h-full max-w-4xl gap-4 p-4"
       >
         <div class="flex flex-row items-center justify-between w-full">
           <Label class="text-xl italic">{{ product.name }}</Label>
-          <Badge class="bg-gray-200 text-gray-700 rounded-md px-2 py-1 hover:bg-gray-200">
-            {{ product.category.name }}
-          </Badge>
+          <Label class="bg-gray-100 text-gray-500 rounded-md px-2 py-1 hover:bg-gray-100">
+            ID: {{ product.id }}
+          </Label>
         </div>
         <div class="flex flex-row items-center justify-between w-full">
           <Label class="text-md">Ціна:</Label>
@@ -52,7 +52,7 @@ const description = computed(() => {
         </DrawerDescription>
       </div>
       <div
-        class="h-full flex flex-col items-center justify-around bg-gray gap-4 p-4"
+        class="h-full flex flex-col items-center justify-around bg-gray gap-4 p-4 w-full max-w-sm "
       >
         <Label class="text-lg">Особливості товару</Label>
 

@@ -24,7 +24,7 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
 const { data, status, error } = await useFetch(
-  "http://localhost:8089/products/category/get"
+  "http://185.65.244.209:8089/products/category/get"
 );
 
 const categories = data.value?.data;

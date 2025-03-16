@@ -2,6 +2,8 @@
 import { Separator } from "@/components/ui/separator";
 import ClientMainPageFAQ from "~/components/ClientMainPageFAQ.vue";
 import ClientMainPageStepper from "~/components/ClientMainPageStepper.vue";
+const { t, locale } = useI18n();
+const localePath = useLocalePath();
 
 const meta = {
   uk: {
@@ -20,36 +22,31 @@ const meta = {
   },
 };
 
-const currentLang = process.client
-  ? window.location.pathname.includes("/ru")
-    ? "ru"
-    : "uk"
-  : "uk";
-
 
 useSeoMeta({
-  title: meta[currentLang].title,
-  description: meta[currentLang].description,
-  ogTitle: meta[currentLang].title,
-  ogDescription: meta[currentLang].description,
+  title: meta[locale.value].title,
+  description: meta[locale.value].description,
+  ogTitle: meta[locale.value].title,
+  ogDescription: meta[locale.value].description,
   ogImage: "/img/og-image.png",
-  ogUrl: meta[currentLang].url,
-  twitterTitle: meta[currentLang].title,
-  twitterDescription: meta[currentLang].description,
+  ogUrl: meta[locale.value].url,
+  twitterTitle: meta[locale.value].title,
+  twitterDescription: meta[locale.value].description,
   twitterImage: "/img/og-image.png",
   twitterCard: "summary",
 });
 
 useHead({
   htmlAttrs: {
-    lang: meta[currentLang].lang,
+    lang: meta[locale.value].lang,
   },
   link: [
-    { rel: "icon", type: "image/png", href: "/favicon.ico" },
-    { rel: "alternate", hreflang: "uk", href: "http://novosad.pp.ua/uk" },
-    { rel: "alternate", hreflang: "ru", href: "http://novosad.pp.ua/ru" },
-    { rel: "alternate", hreflang: "x-default", href: "http://novosad.pp.ua" },
-  ],
+    {
+      rel: 'icon',
+      type: 'image/ico',
+      href: '/_favicon.ico'
+    }
+  ]
 });
 
 </script>

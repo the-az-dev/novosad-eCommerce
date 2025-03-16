@@ -49,7 +49,7 @@ const props = defineProps({
   redirectLink: {
     type: String,
     required: false,
-    default: '',
+    default: '#',
   }
 });
 
@@ -58,7 +58,7 @@ const { product } = props;
 
 <template>
   <Card
-    class="w-full max-w-[320px] shadow-lg border border-gray-300 rounded-xl bg-white"
+    class="w-full max-w-[320px] h-full shadow-lg border border-gray-300 rounded-xl bg-white"
   >
     <CardHeader
       class="h-48 bg-gray-100 flex items-center justify-center rounded-t-lg overflow-hidden"
@@ -103,8 +103,9 @@ const { product } = props;
     </CardFooter>
     <CardFooter class="flex justify-between p-4 w-full" v-else>
       <NuxtLink :to="redirectLink" class="w-full"><Button class="w-full" variant="outline"
-        >Детальніше <i class="pi pi-search"></i
-      ></Button></NuxtLink>
+        >Детальніше</Button></NuxtLink>
+      <NuxtLink :to="product.buy_link" class="w-full"><Button class="w-full" variant="ghost"
+      >Замовити</Button></NuxtLink>
     </CardFooter>
   </Card>
 </template>

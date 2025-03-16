@@ -5,7 +5,7 @@ import ProductPendingCarousel from "@/components/elements/ProductPendingCarousel
 import ProductSuccessCarousel from "@/components/elements/ProductSuccessCarousel.vue";
 import { NuxtLink } from "#components";
 
-const { status } = await useLazyFetch("http://localhost:8089/products/get");
+const { status } = await useLazyFetch("http://185.65.244.209:8089/products/get");
 </script>
 
 <template>

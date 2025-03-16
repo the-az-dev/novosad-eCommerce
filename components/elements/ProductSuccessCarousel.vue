@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import ProductCard from "@/components/elements/ProductCard.vue";
 
-const {data: data, status, error, refresh} = await useLazyFetch('http://localhost:8089/products/get', {
+const {data: data, status, error, refresh} = await useLazyFetch('http://185.65.244.209:8089/products/get', {
   key: 'products',
   cache: false,
   credentials: 'include',

@@ -85,5 +85,10 @@
   "order-mail-placeholder": "Вкажіть свою ел. пошту...",
   "order-address-placeholder": "Вкажіть свою адресу (місто, відділення Нової Пошти)...",
   "order-detail-placeholder": "Вкажіть, що саме ви бажаєте замовити...",
-  "order-submit-btn": "Відправити заявку"
+  "order-submit-btn": "Відправити заявку",
+  "loading-legend": "Завантаження інформації",
+  "locading-content": "Отримуємо інформацію з таємних закуток нашого сайту. Зачекайте, трішки, доки ми знайдемо потрібне!",
+  "product-desc-header": "Опис товару",
+  "product-delivery-header": "Спосіб доставки",
+  "product-payment-header": "Спосіб оплати"
 }

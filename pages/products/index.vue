@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -39,6 +40,7 @@ const selectedFilters = ref<Record<string, string | boolean | number>>({});
 const products = ref([]);
 const loading = ref(false);
 const error = ref(null);
+const _locale = locale.value;
 
 // Динамічне обчислення активної категорії
 const selectedCategory = computed(() => {
@@ -48,7 +50,7 @@ const selectedCategory = computed(() => {
 // Отримання категорій
 const fetchCategories = async () => {
   try {
-    const res = await $fetch("http://localhost:8089/products/category/get?locale="+locale.value);
+    const res = await $fetch("http://185.65.244.209:8089/products/category/get?locale="+locale.value);
     categories.value = res?.data || [];
   } catch (e) {
     console.error("Помилка при отриманні категорій", e);
@@ -60,7 +62,7 @@ const filters = ref([]);
 const fetchFilters = async (subcategoryId: string) => {
   try {
     const res = await $fetch(
-      `http://localhost:8089/products/filters/get?id=${subcategoryId}&locale=${locale.value}`
+      `http://185.65.244.209:8089/products/filters/get?id=${subcategoryId}&locale=${locale.value}`
     );
     filters.value = res?.data || [];
 
@@ -102,19 +104,19 @@ const fetchProducts = async () => {
 
     const queryString = new URLSearchParams(query).toString();
 
-    console.log(`http://localhost:8089/products/get?${queryString}`);
+    console.log(`http://185.65.244.209:8089/products/get?${queryString}`);
     
     
     if(queryString !== null || queryString?.length !== 0 || queryString !== undefined){
       const res = await $fetch(
-        `http://localhost:8089/products/get?${queryString}`
+        `http://185.65.244.209:8089/products/get?${queryString}`
       );
       
       products.value = res?.data || [];
     }
     else{
       const res = await $fetch(
-        `http://localhost:8089/products/get`
+        `http://185.65.244.209:8089/products/get`
       );
       
       products.value = res?.data || [];
@@ -143,16 +145,18 @@ onMounted(async () => {
 // SEO мета
 const meta = {
   uk: {
-    title: "Магазин 'Novosad' - Каталог товарів",
-    description: "Якісні саджанці з Європи...",
+    title: `${t("product-page-name")} - Магазин 'Novosad'`,
+    description:
+      "Якісні саджанці з Європи. Саджанці полуниці 'Фриго' прямо з місця їх росту, розсадники різноманітних плодових дерев та ягідних культур. Доставка по всій території України.",
     lang: "uk-UA",
-    url: `http://novosad.pp.ua/${localePath("products")}`,
+    url: `http://novosad.pp.ua${localePath("products")}`,
   },
   ru: {
-    title: "Магазин 'Novosad' - Каталог товаров",
-    description: "Качественные саженцы из Европы...",
+    title: `${t("product-page-name")} - Магазин 'Novosad'`,
+    description:
+      "Качественные саженцы из Европы. Саженцы клубники 'Фриго' прямо с места их роста, питомники разнообразных плодовых деревьев и ягодных культур. Доставка по всей территории Украины.",
     lang: "ru-RU",
-    url: `http://novosad.pp.ua/${localePath("products")}`,
+    url: `http://novosad.pp.ua${localePath("products")}`,
   },
 };
 
@@ -171,7 +175,16 @@ useSeoMeta({
 });
 
 useHead({
-  htmlAttrs: { lang: meta[locale.value].lang },
+  htmlAttrs: {
+    lang: meta[locale.value].lang,
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/ico',
+      href: '/_favicon.ico'
+    }
+  ]
 });
 </script>
 
@@ -184,18 +197,18 @@ useHead({
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink>
-              <a href="/" class="text-md"> Головна </a>
+              <a href="/" class="text-md"> {{ t("nav-home-title") }} </a>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage class="text-md">Каталог товарів</BreadcrumbPage>
+            <BreadcrumbPage class="text-md">{{ t("product-page-name") }}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
     </div>
     <div class="w-full mx-auto">
-      <Label class="text-3xl">Каталог товарів</Label>
+      <Label class="text-3xl">{{ t("product-page-name") }}</Label>
     </div>
   </div>
 
@@ -288,12 +301,12 @@ useHead({
       </div>
 
       <!-- КНОПКА ЗАСТОСУВАТИ -->
-      <button
-        class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mt-auto"
+      <Button
+        class="bg-blue-500 text-black border p-2 rounded hover:bg-blue-600 mt-auto"
         @click="applyFilters"
       >
         Застосувати
-      </button>
+      </Button>
     </aside>
 
     <!-- Список товарів -->
@@ -309,8 +322,7 @@ useHead({
           >
             <ProductCard
               :product="product"
-              :show-drawer="false"
-              :redirect-link="localePath(`/products/${product?.id}`)"
+              :show-drawer="true"
             />
           </div>
         </div>

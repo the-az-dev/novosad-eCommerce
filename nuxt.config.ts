@@ -78,6 +78,10 @@ export default defineNuxtConfig({
       measurementId: "G-D023GRZM81",
     },
   },
+  primevue: {
+    usePrimeVue: true,
+    loadStyles: true,
+  },
   i18n: {
     locales: [
       { code: "uk", iso: "uk-UA", file: "uk.json", name: "Українська" },
