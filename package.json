@@ -16,6 +16,7 @@
     "@nuxtjs/tailwindcss": "^6.13.1",
     "@primeuix/themes": "^1.0.0",
     "@primevue/forms": "^4.3.2",
+    "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^13.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -30,13 +31,15 @@
     "primeicons": "^7.0.0",
     "primevue": "^4.3.2",
     "quill": "^2.0.3",
-    "reka-ui": "^2.0.2",
+    "reka-ui": "^2.1.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "vaul-vue": "^0.4.0",
+    "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
-    "vuefire": "^3.2.1"
+    "vuefire": "^3.2.1",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",

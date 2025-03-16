@@ -86,9 +86,15 @@
   "order-address-placeholder": "Укажите свой адрес (город, отделение Новой Почты)...",
   "order-detail-placeholder": "Укажите, что именно вы хотите заказать...",
   "order-submit-btn": "Отправить заявку",
+  "order-form-header": "Оформлення заявки на покупку",
+  "order-form-description": "Дана форма дозволяє вам замовити без пробем у нас різноманітні товари. Вкажіть потрібні дані нижче і ми зателефонуємо до вас за наявної нагоди",
   "loading-legend": "Завантаження інформації",
   "locading-content": "Отримуємо інформацію з таємних закуток нашого сайту. Зачекайте, трішки, доки ми знайдемо потрібне!",
   "product-desc-header": "Опис товару",
   "product-delivery-header": "Спосіб доставки",
-  "product-payment-header": "Спосіб оплати"
+  "product-payment-header": "Спосіб оплати",
+  "order-form-toast-title": "Ви це зробили!",
+  "order-form-toast-description": "Ви замовили - ми хутенько зателефонуємо до вас!",
+  "order-form-toast-title-error": "Упс! Сталась помилка!",
+  "order-form-toast-description-error": "Ми почали розбиратись із помилкою, спробуйте пізніше!"
 }

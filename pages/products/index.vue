@@ -141,51 +141,6 @@ onMounted(async () => {
   console.log(products);
   
 });
-
-// SEO мета
-const meta = {
-  uk: {
-    title: `${t("product-page-name")} - Магазин 'Novosad'`,
-    description:
-      "Якісні саджанці з Європи. Саджанці полуниці 'Фриго' прямо з місця їх росту, розсадники різноманітних плодових дерев та ягідних культур. Доставка по всій території України.",
-    lang: "uk-UA",
-    url: `http://novosad.pp.ua${localePath("products")}`,
-  },
-  ru: {
-    title: `${t("product-page-name")} - Магазин 'Novosad'`,
-    description:
-      "Качественные саженцы из Европы. Саженцы клубники 'Фриго' прямо с места их роста, питомники разнообразных плодовых деревьев и ягодных культур. Доставка по всей территории Украины.",
-    lang: "ru-RU",
-    url: `http://novosad.pp.ua${localePath("products")}`,
-  },
-};
-
-useSeoMeta({
-  title: meta[locale.value].title,
-  description: meta[locale.value].description,
-  ogTitle: meta[locale.value].title,
-  ogDescription: meta[locale.value].description,
-  ogImage: "/img/og-image.png",
-  twitterTitle: meta[locale.value].title,
-  twitterDescription: meta[locale.value].description,
-  twitterImage: "/img/og-image.png",
-  twitterCard: "summary",
-  ogLocale: locale.value === "uk" ? "uk_UA" : "ru_RU",
-  ogUrl: meta[locale.value].url,
-});
-
-useHead({
-  htmlAttrs: {
-    lang: meta[locale.value].lang,
-  },
-  link: [
-    {
-      rel: 'icon',
-      type: 'image/ico',
-      href: '/_favicon.ico'
-    }
-  ]
-});
 </script>
 
 <template>

@@ -29,6 +29,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       gtagId: "G-D023GRZM81",
+      tgBotLink: "https://api.telegram.org/bot7898072240:AAEB3fAzevRlC6rv0n3hf3nwVcSHYwkw7Y8/sendMessage?chat_id=-4606585191",
+      apiUrl: "http://185.65.244.209:8089/"
     },
   },
   site: {
@@ -53,6 +55,7 @@ export default defineNuxtConfig({
     "@zadigetvoltaire/nuxt-gtm",
     "nuxt-vuefire",
     "nuxt-simple-sitemap",
+    'reka-ui/nuxt',
   ],
   tailwindcss: {
     exposeConfig: true,
