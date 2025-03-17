@@ -68,7 +68,6 @@ ${values.detail}
 `;
 
   const encodedMessage = encodeURIComponent(message_text);
-  console.log(config.public.tgBotLink)
   fetch(
       `${
           config.public.tgBotLink
