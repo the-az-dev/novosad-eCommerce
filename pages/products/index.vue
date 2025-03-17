@@ -12,6 +12,14 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
 } from "@/components/ui/navigation-menu";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ref, onMounted, watch, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useSeoMeta, useHead, useLazyFetch, useLocalePath } from "#imports";
@@ -135,9 +143,6 @@ const fetchProducts = async () => {
       const queryString = new URLSearchParams(query).toString();
 
       console.log(config.public.apiUrl + `products/get?${queryString}`);
-
-      // 185.65.244.209
-
       if (queryString) {
         const encodedMessage = encodeURIComponent(queryString)
         const res = await $fetch(
@@ -183,7 +188,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="w-full max-h-[40vh] px-8 py-8 flex flex-col gap-6 border-b">
     <div
-      class="w-full bg-[#bcaf45] flex flex-row items-center justify-start max-h-2"
+      class="w-full flex flex-row items-center justify-start max-h-2"
     >
       <Breadcrumb>
         <BreadcrumbList>
@@ -205,12 +210,12 @@ onBeforeUnmount(() => {
   </div>
 
   <div
-      class="p-8 w-full flex gap-8 flex-row justify-center overflow-hidden transition-[height] duration-300"
+      class="p-8 w-full flex gap-8 flex-row overflow-hidden transition-[height] duration-300"
       :style="{ 'min-height': loading ? '42.5vh' : (products.length ? 'auto' : '42.5vh') }"
   >
     <!-- Фільтри -->
     <aside
-      class="w-full max-w-[30vh] bg-white p-6 rounded-xl shadow-lg border h-auto flex flex-col min-h-screen justify-between items-center"
+      class="w-full min-w-[30vh] max-w-[30vh] bg-white p-6 rounded-xl shadow-lg border h-auto flex flex-col min-h-screen justify-between items-center"
     >
       <div class="w-full flex flex-col items-center gap-2">
         <h2 class="text-xl font-semibold mb-4">{{ t("product-filters-title") }}</h2>
@@ -327,7 +332,8 @@ onBeforeUnmount(() => {
       </div>
       <!-- КНОПКА ЗАСТОСУВАТИ -->
       <Button
-        class="bg-blue-500 text-black border p-2 rounded hover:bg-blue-600 mt-auto w-full"
+          variant="outline"
+        class="text-black border p-2 rounded mt-auto w-full"
         @click="applyFilters"
       >
         Застосувати
@@ -336,14 +342,14 @@ onBeforeUnmount(() => {
 
     <!-- Список товарів -->
     <div
-      class="w-full max-w-[60vh] flex flex-wrap gap-4 h-full min-h-screen justify-center items-center"
+      class="w-full flex flex-wrap gap-4 h-full justify-center items-center"
     >
       <NavigationMenu v-if="!loading" class="w-full">
-        <div class="flex flex-wrap justify-start gap-4">
+        <div class="flex flex-wrap justify-start gap-4 w-full">
           <div
             v-for="(product, index) in products"
             :key="product?.id"
-            class="w-[calc(33.333%-0.5rem)] sm:w-[calc(25%-0.5rem)] md:w-[calc(20%-0.5rem)] lg:w-[calc(16.666%-0.5rem)] xl:w-[calc(14.285%-0.5rem)]"
+            class="w-[calc(1-0.5rem)] sm:w-[calc(2-0.5rem)] md:w-[calc(3-0.5rem)] lg:w-[calc(4-0.5rem)] xl:w-[calc(5-0.5rem)]"
           >
             <div
                 v-if="!loading"
@@ -359,17 +365,17 @@ onBeforeUnmount(() => {
         </div>
       </NavigationMenu>
       <NavigationMenu v-if="notFound" class="w-full opacity-0 animate-fade-up flex flex-col gap-2 items-center justify-center">
-        <div class="flex flex-wrap justify-start gap-4">
+        <div class="flex flex-wrap gap-4">
           <img src="https://img.icons8.com/color/425/dead-tree.png" alt="Error icon - Novosad Shop">
         </div>
-        <Label class="text-2xl font-medium">{{ t("no-info-found") }}</Label>
+        <Label class="text-2xl font-medium text-center">{{ t("no-info-found") }}</Label>
       </NavigationMenu>
       <NavigationMenu v-else-if="loading" class="w-full">
         <div class="flex flex-wrap justify-start gap-4">
           <div
-            v-for="i in 4"
+            v-for="i in 25"
             :key="i"
-            class="w-[calc(33.333%-0.5rem)] sm:w-[calc(25%-0.5rem)] md:w-[calc(20%-0.5rem)] lg:w-[calc(16.666%-0.5rem)] xl:w-[calc(14.285%-0.5rem)]"
+            class="w-[calc(1-0.5rem)] sm:w-[calc(2-0.5rem)] md:w-[calc(3-0.5rem)] lg:w-[calc(4-0.5rem)] xl:w-[calc(5-0.5rem)]"
           >
             <div
                 :style="{ animationDelay: `${(i+1) * 100}ms` }"

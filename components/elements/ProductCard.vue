@@ -59,7 +59,7 @@ const { product } = props;
 
 <template>
   <Card
-    class="w-full max-w-[320px] min-w-[320px] h-full shadow-lg border border-gray-300 rounded-xl bg-white opacity-0 animate-fade-up"
+    class="w-full max-w-[320px] min-w-[120px] h-full min-h-[380px] max-h-[380px] shadow-lg border border-gray-300 rounded-xl bg-white opacity-0 animate-fade-up"
   >
     <CardHeader
       class="h-48 bg-gray-100 flex items-center justify-center rounded-t-lg overflow-hidden"
@@ -78,16 +78,17 @@ const { product } = props;
           {{ product.category?.name }}
         </Badge>
         <CardTitle
-          >{{ product?.price }} {{ t("product-item-price-quantity") }} / {{ product?.minimal_order }} {{ t("product-item-price-per-amount") }}</CardTitle
+          >{{ product?.price }} {{ t("product-item-price-quantity") }}</CardTitle
         >
       </CardDescription>
       <CardTitle
-          class="text-lg font-semibold text-gray-900 w-full line-clamp-2"
+          class="text-lg font-semibold text-gray-900 w-full line-clamp-none
+            h-full min-h-[5vh] max-h-[5vh] relative z-[999]"
       >
         {{ product?.name }}
       </CardTitle>
     </CardContent>
-    <CardFooter class="flex justify-between p-4 w-full" v-if="showDrawer">
+    <CardFooter class="flex flex-col justify-between p-4 w-full max-h-[1vh]" v-if="showDrawer">
       <Drawer v-model:open="isOpen">
         <DrawerTrigger as-child>
           <Button class="w-full" variant="outline"
@@ -99,10 +100,10 @@ const { product } = props;
           <DrawerFooter>
             <a :href="product?.buy_link"
             ><Button class="bg-[#A020F0] hover:bg-[#A020F0] text-md w-full" size="lg"
-            >{{ t("product-item-buy") }}}<i class="pi pi-shopping-cart"></i></Button
+            >{{ t("product-item-buy") }}<i class="pi pi-shopping-cart"></i></Button
             ></a>
             <DrawerClose as-child>
-              <Button variant="outline">Закрити</Button>
+              <Button variant="outline">{{ t("product-item-info-close") }}</Button>
             </DrawerClose>
           </DrawerFooter>
         </DrawerContent>
@@ -112,7 +113,7 @@ const { product } = props;
       <NuxtLink :to="redirectLink" class="w-full"><Button class="w-full" variant="outline"
         >{{ t("product-item-more-info") }}</Button></NuxtLink>
       <NuxtLink :to="product?.buy_link" class="w-full"><Button class="w-full" variant="ghost"
-      >{{ t("product-item-buy") }}}</Button></NuxtLink>
+      >{{ t("product-item-buy") }}</Button></NuxtLink>
     </CardFooter>
   </Card>
 </template>

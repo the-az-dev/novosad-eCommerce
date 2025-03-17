@@ -77,7 +77,7 @@ const { t } = useI18n();
           <p>{{ t("footer-social-media-title") }}</p>
           <ul class="flex flex-row gap-[10px] items-center mt-[20px]">
             <li>
-              <NuxtLink to="/">
+              <NuxtLink to="https://novosad.prom.ua/ua/">
                 <img
                   src="/img/footer/prom.png"
                   alt="novosad.prom.ua"
@@ -85,7 +85,7 @@ const { t } = useI18n();
               /></NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/">
+              <NuxtLink to="https://www.facebook.com/novosadinua">
                 <img
                   width="48"
                   height="48"

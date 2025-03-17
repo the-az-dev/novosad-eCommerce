@@ -50,14 +50,13 @@ const description = computed(() => {
             <div class="flex flex-row items-center gap-2 w-full">
               <Label class="text-md">Ціна:</Label>
               <Label class="text-md"
-              >{{ product?.price }} грн. / {{ product?.minimal_order }} шт.</Label
+              >{{ product?.price }} грн.</Label
               >
             </div>
 
           </div>
         </div>
-        <div class="flex flex-col gap-4 w-full py-4 border-t items-center justify-center h-full max-h-[35vh]">
-          <Label class="text-lg w-full border-b pb-4 text-center">Опис</Label>
+        <div class="flex flex-col gap-4 w-full py-4 border-t items-center justify-center h-full max-h-[32vh]">
           <DrawerDescription v-html="description" class="overflow-y-auto overflow-x-hidden text-md" />
         </div>
       </div>
@@ -69,6 +68,10 @@ const description = computed(() => {
         <div class="w-full max-h-[200px] overflow-y-auto">
           <Table class="w-full">
             <TableBody class="w-full">
+              <TableRow>
+                <TableCell class="font-medium text-center w-[40vh] border-r">{{ t("min-order-quantity") }}</TableCell>
+                <TableCell class="text-center w-[40vh] border-l">{{ product?.minimal_order }} {{ t("product-item-price-per-amount") }}</TableCell>
+              </TableRow>
               <TableRow
                 v-for="[key, value] in Object.entries(product?.attributes)"
                 :key="key"
