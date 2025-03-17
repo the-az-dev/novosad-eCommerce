@@ -12,6 +12,14 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
 } from "@/components/ui/navigation-menu";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ref, onMounted, watch, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useSeoMeta, useHead, useLazyFetch, useLocalePath } from "#imports";
