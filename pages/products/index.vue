@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {
   Breadcrumb,
-  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
@@ -12,12 +11,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { ref, onMounted, watch, computed } from "vue";
 import { useI18n } from "vue-i18n";
@@ -40,7 +33,12 @@ const selectedFilters = ref<Record<string, string | boolean | number>>({});
 const products = ref([]);
 const loading = ref(false);
 const error = ref(null);
-const _locale = locale.value;
+let isMounted = true;
+let timeoutId;
+const searchedName = ref('')
+const max_price = ref(0)
+const min_price = ref(0)
+const config = useRuntimeConfig();
 
 // Динамічне обчислення активної категорії
 const selectedCategory = computed(() => {
@@ -50,7 +48,7 @@ const selectedCategory = computed(() => {
 // Отримання категорій
 const fetchCategories = async () => {
   try {
-    const res = await $fetch("http://185.65.244.209:8089/products/category/get?locale="+locale.value);
+    const res = await $fetch( config.public.apiUrl + "products/category/get?locale="+locale.value);
     categories.value = res?.data || [];
   } catch (e) {
     console.error("Помилка при отриманні категорій", e);
@@ -62,7 +60,7 @@ const filters = ref([]);
 const fetchFilters = async (subcategoryId: string) => {
   try {
     const res = await $fetch(
-      `http://185.65.244.209:8089/products/filters/get?id=${subcategoryId}&locale=${locale.value}`
+        config.public.apiUrl + `products/filters/get?id=${subcategoryId}&locale=${locale.value}`
     );
     filters.value = res?.data || [];
 
@@ -78,55 +76,89 @@ const fetchFilters = async (subcategoryId: string) => {
 
 // Слухаємо зміну підкатегорії
 watch(selectedSubcategoryId, (id) => {
-  if (id) fetchFilters(id);
+  if (id) {
+    fetchFilters(id);
+    fetchProducts();
+  }
 });
+
+watch(searchedName, (value) => {
+  if (value.length > 0) {
+    fetchProducts();
+  }
+})
+
+watch(min_price, (value) => {
+  if (value > 0) {
+    fetchProducts();
+  }
+})
+
+watch(max_price, (value) => {
+  if (value > 0) {
+    fetchProducts();
+  }
+})
 
 // Отримання товарів з урахуванням обраних фільтрів
 const fetchProducts = async () => {
   loading.value = true;
   error.value = null;
+  clearTimeout(timeoutId); // Скасовуємо попередній таймаут (якщо він існує)
 
-  try {
-    const query: Record<string, any> = {
-      locale: locale.value,
-    };
+  timeoutId = setTimeout(async () => {
+    try {
+      const query: Record<string, any> = {
+        locale: locale.value,
+      };
 
-    if (selectedSubcategoryId.value) {
-      query.subcategory = selectedSubcategoryId.value;
-    }
-
-    // Додаємо фільтри в запит
-    Object.entries(selectedFilters.value).forEach(([key, val]) => {
-      if (val !== "") {
-        query[key] = val;
+      if (selectedSubcategoryId.value) {
+        query.subcategory_id = selectedSubcategoryId.value;
       }
-    });
 
-    const queryString = new URLSearchParams(query).toString();
+      if(searchedName.value) {
+        query.name = searchedName.value;
+      }
 
-    console.log(`http://185.65.244.209:8089/products/get?${queryString}`);
-    
-    
-    if(queryString !== null || queryString?.length !== 0 || queryString !== undefined){
-      const res = await $fetch(
-        `http://185.65.244.209:8089/products/get?${queryString}`
-      );
-      
-      products.value = res?.data || [];
+      if(min_price.value && min_price.value) {
+        query.price_min = min_price.value;
+        query.price_max = max_price.value;
+      }
+
+      // Додаємо фільтри в запит
+      Object.entries(selectedFilters.value).forEach(([key, val]) => {
+        if (val !== "") {
+          query[`filter_${key}`] = val;
+        }
+      });
+
+      const queryString = new URLSearchParams(query).toString();
+
+      console.log(config.public.apiUrl + `products/get?${queryString}`);
+
+      // 185.65.244.209
+
+      if (queryString) {
+        const encodedMessage = encodeURIComponent(queryString)
+        const res = await $fetch(
+            config.public.apiUrl + `products/get?${queryString}`
+        );
+
+        products.value = Array.isArray(res?.data) ? res.data : [];
+      } else {
+        const res = await $fetch(
+            config.public.apiUrl + `products/get`
+        );
+
+        products.value = Array.isArray(res?.data) ? res.data : [];
+      }
+    } catch (e) {
+      console.error("Помилка при отриманні товарів", e);
+      error.value = e;
+    } finally {
+      loading.value = false;
     }
-    else{
-      const res = await $fetch(
-        `http://185.65.244.209:8089/products/get`
-      );
-      
-      products.value = res?.data || [];
-    }
-  } catch (e) {
-    console.error("Помилка при отриманні товарів", e);
-    error.value = e;
-  } finally {
-    loading.value = false;
-  }
+  }, 2000);
 };
 
 // Застосування фільтрів
@@ -134,12 +166,17 @@ const applyFilters = () => {
   fetchProducts();
 };
 
+const notFound = computed(() => {
+  return !!((products.value.length === 0 && !loading.value) || searchedName.value !== "" || min_price.value || max_price.value && selectedCategory.value || selectedSubcategoryId.value);
+})
+
 onMounted(async () => {
   await fetchCategories();
-  await fetchProducts();
-  console.log(loading);
-  console.log(products);
-  
+  if (isMounted) await fetchProducts();
+});
+
+onBeforeUnmount(() => {
+  isMounted = false;
 });
 </script>
 
@@ -167,97 +204,130 @@ onMounted(async () => {
     </div>
   </div>
 
-  <div class="p-8 w-full min-h-screen flex gap-8 flex-row justify-center">
+  <div
+      class="p-8 w-full flex gap-8 flex-row justify-center overflow-hidden transition-[height] duration-300"
+      :style="{ 'min-height': loading ? '42.5vh' : (products.length ? 'auto' : '42.5vh') }"
+  >
     <!-- Фільтри -->
     <aside
-      class="w-full max-w-[30vh] bg-white p-6 rounded-lg shadow-md h-full flex flex-col min-h-screen"
+      class="w-full max-w-[30vh] bg-white p-6 rounded-xl shadow-lg border h-auto flex flex-col min-h-screen justify-between items-center"
     >
-      <h2 class="text-xl font-semibold mb-4">Фільтри</h2>
+      <div class="w-full flex flex-col items-center gap-2">
+        <h2 class="text-xl font-semibold mb-4">{{ t("product-filters-title") }}</h2>
 
-      <!-- Вибір категорії/підкатегорії -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium">Категорія</label>
-        <select class="w-full border p-2 rounded" v-model="selectedCategoryId">
-          <option disabled value="">Оберіть категорію</option>
-          <option
-            v-for="category in categories"
-            :key="category.id"
-            :value="category.id"
-          >
-            {{ category.name }}
-          </option>
-        </select>
-      </div>
-
-      <!-- Вибір підкатегорії -->
-      <div class="mb-4" v-if="selectedCategory">
-        <label class="block text-sm font-medium">Підкатегорія</label>
-        <select
-          class="w-full border p-2 rounded"
-          v-model="selectedSubcategoryId"
-        >
-          <option disabled value="">Оберіть підкатегорію</option>
-          <option
-            v-for="subcategory in selectedCategory.subcategory"
-            :key="subcategory.id"
-            :value="subcategory.id"
-          >
-            {{ subcategory.name }}
-          </option>
-        </select>
-      </div>
-
-      <!-- Відображення фільтрів -->
-      <!-- Відображення фільтрів -->
-      <div v-if="filters.length > 0" class="flex flex-col gap-4">
-        <div v-for="(filter, idx) in filters" :key="idx">
-          <label class="block text-sm font-medium mb-1">{{
-            filter?.name
-          }}</label>
-
-          <!-- SELECT -->
-          <template v-if="filter?.type === 'select'">
-            <select
-              class="w-full border p-2 rounded"
-              v-model="selectedFilters[filter.name]"
-            >
-              <option value="">Усі</option>
-              <option v-for="(val, i) in filter.values" :key="i" :value="val">
-                {{ val }}
-              </option>
-            </select>
-          </template>
-
-          <!-- BOOLEAN -->
-          <template v-else-if="filter?.type === 'boolean'">
-            <div class="flex gap-2 items-center">
-              <label>
-                <input
-                  type="checkbox"
-                  :checked="selectedFilters[filter.name] === true"
-                  @change="selectedFilters[filter.name] = $event.target.checked"
-                />
-                Так
-              </label>
-            </div>
-          </template>
-
-          <!-- TEXT або NUMBER -->
-          <template
-            v-else-if="filter?.type === 'number' || filter?.type === 'text'"
-          >
-            <input
+        <!-- Пошук назви товару -->
+        <div class="mb-4 opacity-0 animate-fade-up flex flex-col gap-2 w-full">
+          <label class="block text-sm font-medium">{{ t("product-search-label") }}</label>
+          <input
               type="text"
-              class="w-full border p-2 rounded"
-              v-model="selectedFilters[filter.name]"
-            />
-          </template>
+              class="w-full border p-2 rounded-lg"
+              :placeholder="t('product-search-placeholder')"
+              v-model="searchedName"
+          />
         </div>
-      </div>
 
+        <!-- Пошук цінового діапазону -->
+        <div class="mb-4 opacity-0 animate-fade-up flex flex-col gap-2 w-full">
+          <label class="block text-sm font-medium">{{ t("product-price-label") }}</label>
+          <div class="flex w-full flex-row items-center gap-2">
+            <input
+                type="number"
+                class="w-full border p-2 rounded-lg"
+                :placeholder="t('product-price-placeholder-from')"
+                v-model="min_price"
+            />
+            <input
+                type="number"
+                class="w-full border p-2 rounded-lg"
+                :placeholder="t('product-price-placeholder-to')"
+                v-model="max_price"
+            />
+          </div>
+        </div>
+
+        <!-- Вибір категорії/підкатегорії -->
+        <div class="mb-4 opacity-0 animate-fade-up flex flex-col gap-2 w-full">
+          <label class="block text-sm font-medium">{{ t("product-group-label") }}</label>
+          <select class="w-full border p-2 rounded-lg" v-model="selectedCategoryId">
+            <option disabled value="">{{ t("product-group-all-selection") }}</option>
+            <option
+                v-for="category in categories"
+                :key="category.id"
+                :value="category.id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Вибір підкатегорії -->
+        <div class="mb-4 opacity-0 animate-fade-up flex flex-col gap-2 w-full" v-if="selectedCategory">
+          <label class="block text-sm font-medium">{{ t("product-category-label") }}</label>
+          <select
+              class="w-full border p-2 rounded-lg"
+              v-model="selectedSubcategoryId"
+          >
+            <option disabled value="">{{ t("product-category-all-selection") }}</option>
+            <option
+                v-for="subcategory in selectedCategory.subcategory"
+                :key="subcategory.id"
+                :value="subcategory.id"
+            >
+              {{ subcategory.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Відображення фільтрів -->
+        <div v-if="filters.length > 0" class="flex flex-col gap-4 w-full mb-4">
+          <div v-for="(filter, idx) in filters" :key="idx" class="opacity-0 animate-fade-up">
+            <label class="block text-sm font-medium mb-2">{{
+                filter?.name
+              }}</label>
+
+            <!-- SELECT -->
+            <template v-if="filter?.type === 'select'">
+              <select
+                  class="w-full border p-2 rounded-lg"
+                  v-model="selectedFilters[filter.name]"
+              >
+                <option value="">Усі</option>
+                <option v-for="(val, i) in filter.values" :key="i" :value="val">
+                  {{ val }}
+                </option>
+              </select>
+            </template>
+
+            <!-- BOOLEAN -->
+            <template v-else-if="filter?.type === 'boolean'" class="opacity-0 animate-fade-up">
+              <div class="flex gap-2 items-center">
+                <label>
+                  <input
+                      type="checkbox"
+                      :checked="selectedFilters[filter.name] === true"
+                      @change="selectedFilters[filter.name] = $event.target.checked"
+                  />
+                  Так
+                </label>
+              </div>
+            </template>
+
+            <!-- TEXT або NUMBER -->
+            <template
+                v-else-if="filter?.type === 'number' || filter?.type === 'text'" class="opacity-0 animate-fade-up">
+              <input
+                  type="text"
+                  class="w-full border p-2 rounded-lg"
+                  v-model="selectedFilters[filter.name]"
+              />
+            </template>
+          </div>
+        </div>
+
+      </div>
       <!-- КНОПКА ЗАСТОСУВАТИ -->
       <Button
-        class="bg-blue-500 text-black border p-2 rounded hover:bg-blue-600 mt-auto"
+        class="bg-blue-500 text-black border p-2 rounded hover:bg-blue-600 mt-auto w-full"
         @click="applyFilters"
       >
         Застосувати
@@ -271,25 +341,42 @@ onMounted(async () => {
       <NavigationMenu v-if="!loading" class="w-full">
         <div class="flex flex-wrap justify-start gap-4">
           <div
-            v-for="product in products"
+            v-for="(product, index) in products"
             :key="product?.id"
             class="w-[calc(33.333%-0.5rem)] sm:w-[calc(25%-0.5rem)] md:w-[calc(20%-0.5rem)] lg:w-[calc(16.666%-0.5rem)] xl:w-[calc(14.285%-0.5rem)]"
           >
-            <ProductCard
-              :product="product"
-              :show-drawer="true"
-            />
+            <div
+                v-if="!loading"
+                :style="{ animationDelay: `${(index+1) * 100}ms` }"
+                class="opacity-0 animate-fade-up"
+              >
+              <ProductCard
+                  :product="product"
+                  :show-drawer="true"
+              />
+            </div>
           </div>
         </div>
       </NavigationMenu>
-      <NavigationMenu v-else class="w-full">
+      <NavigationMenu v-if="notFound" class="w-full opacity-0 animate-fade-up flex flex-col gap-2 items-center justify-center">
+        <div class="flex flex-wrap justify-start gap-4">
+          <img src="https://img.icons8.com/color/425/dead-tree.png" alt="Error icon - Novosad Shop">
+        </div>
+        <Label class="text-2xl font-medium">{{ t("no-info-found") }}</Label>
+      </NavigationMenu>
+      <NavigationMenu v-else-if="loading" class="w-full">
         <div class="flex flex-wrap justify-start gap-4">
           <div
             v-for="i in 4"
             :key="i"
             class="w-[calc(33.333%-0.5rem)] sm:w-[calc(25%-0.5rem)] md:w-[calc(20%-0.5rem)] lg:w-[calc(16.666%-0.5rem)] xl:w-[calc(14.285%-0.5rem)]"
           >
-            <ProductCardSkeleton />
+            <div
+                :style="{ animationDelay: `${(i+1) * 100}ms` }"
+                class="opacity-0 animate-fade-up"
+            >
+              <ProductCardSkeleton />
+            </div>
           </div>
         </div>
       </NavigationMenu>

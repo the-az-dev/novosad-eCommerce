@@ -53,6 +53,14 @@ export default {
   			}
   		},
   		keyframes: {
+			'fade-up': {
+				'0%': { opacity: 0, transform: 'translateY(20px)' },
+				'100%': { opacity: 1, transform: 'translateY(0)' },
+			},
+			'fade-in': {
+				'0%': { opacity: 0 },
+				'100%': { opacity: 1 }
+			},
   			overlayShow: {
   				from: {
   					opacity: 0
@@ -93,6 +101,8 @@ export default {
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			overlayShow: 'overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
   			contentShow: 'contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+			'fade-in': 'fade-in 0.5s ease-out forwards',
+			'fade-up': 'fade-up 0.3s ease-out forwards',
   		}
   	}
   },

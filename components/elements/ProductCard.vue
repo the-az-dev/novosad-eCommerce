@@ -58,7 +58,7 @@ const { product } = props;
 
 <template>
   <Card
-    class="w-full max-w-[320px] h-full shadow-lg border border-gray-300 rounded-xl bg-white"
+    class="w-full max-w-[320px] min-w-[320px] h-full shadow-lg border border-gray-300 rounded-xl bg-white opacity-0 animate-fade-up"
   >
     <CardHeader
       class="h-48 bg-gray-100 flex items-center justify-center rounded-t-lg overflow-hidden"
@@ -80,7 +80,9 @@ const { product } = props;
           >{{ product.price }} грн. / {{ product.minimal_order }} шт.</CardTitle
         >
       </CardDescription>
-      <CardTitle class="text-lg font-semibold text-gray-900">
+      <CardTitle
+          class="text-lg font-semibold text-gray-900 w-full line-clamp-2"
+      >
         {{ product.name }}
       </CardTitle>
     </CardContent>
@@ -94,6 +96,10 @@ const { product } = props;
         <DrawerContent class="p-4">
           <ProductDrawerContent :product="product" />
           <DrawerFooter>
+            <a :href="product.buy_link"
+            ><Button class="bg-[#A020F0] hover:bg-[#A020F0] text-md w-full" size="lg"
+            >Замовити на Prom<i class="pi pi-shopping-cart"></i></Button
+            ></a>
             <DrawerClose as-child>
               <Button variant="outline">Закрити</Button>
             </DrawerClose>
