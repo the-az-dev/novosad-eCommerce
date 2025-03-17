@@ -1,6 +1,10 @@
 import type { NuxtPage } from "nuxt/schema";
 
 export default defineNuxtConfig({
+  nitro: {
+    serveStatic: true
+  },
+  ssr: false,
   app: {
     head: {
       script: [

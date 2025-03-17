@@ -12,10 +12,11 @@ import { Table, TableBody, TableCell, TableRow } from "~/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
+const config = useRuntimeConfig();
 
 const route = useRoute();
 const { data, error, status } = await useLazyFetch(
-  `http://localhost:8089/products/get?id=${route.params.id}&locale=${locale.value}`
+  `${config.public.apiUrl}products/get?id=${route.params.id}&locale=${locale.value}`
 );
 const product = data.value?.data[0];
 </script>

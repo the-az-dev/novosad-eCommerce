@@ -11,18 +11,18 @@ const accordionItems = [
   {
     value: "item-1",
     title: t("faq-q1-header"),
-    content: t("faq-g1-content"),
+    content: t("faq-q1-content"),
   },
   {
     value: "item-2",
     title: t("faq-q2-header"),
     content:
-      t("faq-g2-content"),
+      t("faq-q1-content"),
   },
   {
     value: "item-3",
     title: t("faq-q3-header"),
-    content: t("faq-g3-content"),
+    content: t("faq-q1-content"),
   },
 ];
 </script>

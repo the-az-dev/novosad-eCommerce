@@ -33,7 +33,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useI18n } from "vue-i18n";
-const { t } = useI18n();
+const localePath = useLocalePath();
+const { t, locale } = useI18n();
 import { toast } from '@/components/ui/toast'
 import { toTypedSchema } from '@vee-validate/zod'
 import { h } from 'vue'
@@ -89,12 +90,56 @@ ${values.detail}
     })
   });
 }
+
+const meta = {
+  uk: {
+    title: "Замовлення та доставка - Магазин 'Novosad'",
+    description:
+        "Якісні саджанці з Європи. Саджанці полуниці 'Фриго' прямо з місця їх росту, розсадники різноманітних плодових дерев та ягідних культур. Доставка по всій території України.",
+    lang: "uk-UA",
+    url: "http://novosad.pp.ua/uk/blog/",
+  },
+  ru: {
+    title: "Заказ и доставка - Магазин 'Novosad'",
+    description:
+        "Качественные саженцы из Европы. Саженцы клубники 'Фриго' прямо с места их роста, питомники разнообразных плодовых деревьев и ягодных культур. Доставка по всей территории Украины.",
+    lang: "ru-RU",
+    url: "http://novosad.pp.ua/ru/blog/",
+  },
+};
+
+
+useSeoMeta({
+  title: meta[locale.value].title,
+  description: meta[locale.value].description,
+  ogTitle: meta[locale.value].title,
+  ogDescription: meta[locale.value].description,
+  ogImage: "/img/og-image.png",
+  ogUrl: meta[locale.value].url,
+  twitterTitle: meta[locale.value].title,
+  twitterDescription: meta[locale.value].description,
+  twitterImage: "/img/og-image.png",
+  twitterCard: "summary",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: meta[locale.value].lang,
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/ico',
+      href: '/_favicon.ico'
+    }
+  ]
+});
 </script>
 
 <template>
   <div class="w-full max-h-[40vh] px-8 py-8 flex flex-col gap-6 border-b">
     <div
-        class="w-full bg-[#bcaf45] flex flex-row items-center justify-start max-h-2"
+        class="w-full flex flex-row items-center justify-start max-h-2"
     >
       <Breadcrumb>
         <BreadcrumbList>
@@ -115,7 +160,7 @@ ${values.detail}
     </div>
   </div>
 
-  <div class="h-full w-full p-6 flex flex-col md:flex-row gap-6 md:gap-12 items-stretch justify-around">
+  <div class="h-full w-full p-6 flex flex-col gap-6 md:gap-12 items-stretch justify-around">
     <Card class="rounded-xl shadow-lg border flex-1 p-6 flex flex-row items-center gap-6">
       <CardHeader class="w-32 h-32 flex items-center justify-center">
         <img

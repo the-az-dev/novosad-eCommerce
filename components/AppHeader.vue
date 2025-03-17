@@ -17,7 +17,7 @@ const localePath = useLocalePath();
       />
     </div>
 
-    <div class="max-w-[60%]">
+    <div class="">
       <ol class="flex flex-row justify-around items-center w-full">
         <li class="mr-9">
           <NuxtLink :to="localePath('index')" rel="canonical">{{

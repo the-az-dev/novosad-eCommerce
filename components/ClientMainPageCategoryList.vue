@@ -22,9 +22,10 @@ import CategoryCard from "./elements/CategoryCard.vue";
 import CategoryCardSkeleton from "./elements/CategoryCardSkeleton.vue";
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
+const config = useRuntimeConfig();
 
 const { data, status, error } = await useFetch(
-  "http://185.65.244.209:8089/products/category/get?locale=" + locale.value,
+  config.public.apiUrl + "products/category/get?locale=" + locale.value,
 );
 
 const categories = data.value?.data;
@@ -32,7 +33,7 @@ const categories = data.value?.data;
 
 <template>
   <div
-    class="max-h-[60vh] w-full flex flex-col items-center justify-between gap-14 p-8 pb-8"
+    class="w-full flex flex-col items-center justify-between gap-14 p-8 pb-8"
   >
     <div class="flex flex-row justify-center items-center w-full max-w-7xl">
       <Label class="text-3xl font-semibold">{{ t("home-category-section-title") }}</Label>
@@ -47,7 +48,7 @@ const categories = data.value?.data;
         <NuxtLink
           v-for="category in categories"
           :key="category.id"
-          :to="localePath(`/category/${category.id}`)"
+          :to="localePath(`/products`)"
           class="w-[calc(100%/2-0.5rem)] sm:w-[calc(100%/3-0.5rem)] md:w-[calc(100%/4-0.5rem)] lg:w-[calc(100%/5-0.5rem)] xl:w-[calc(100%/6-0.5rem)]"
         >
           <CategoryCard :category="category" />
