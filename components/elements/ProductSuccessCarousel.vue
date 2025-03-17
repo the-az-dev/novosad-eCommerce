@@ -7,8 +7,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import ProductCard from "@/components/elements/ProductCard.vue";
-
-const {data: data, status, error, refresh} = await useLazyFetch('http://185.65.244.209:8089/products/get', {
+const { t, locale } = useI18n();
+const {data: data, status, error, refresh} = await useLazyFetch(`http://185.65.244.209:8089/products/get?locale=${locale.value}&filter_Сезон=Весна`, {
   key: 'products',
   cache: false,
   credentials: 'include',
@@ -26,8 +26,8 @@ const pagination = computed(() => data.value?.pages || {})
       <CarouselContent class="flex">
         <CarouselItem
           v-for="product in products"
-          :key="product.name"
-          class="w-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 flex justify-center p-4"
+          :key="product?.name"
+          class="w-full sm:basis-1/1 md:basis-1/2 lg:basis-1/3 flex justify-center p-6"
         >
           <ProductCard :product="product"/>
         </CarouselItem>

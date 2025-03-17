@@ -17,9 +17,10 @@ const props = defineProps({
 });
 
 const { product } = props;
+const { t } = useI18n();
 
 const description = computed(() => {
-  return DOMPurify.sanitize(product.description.replace(/\\r\\n/g, "<br>"));
+  return DOMPurify.sanitize(product?.description.replace(/\\r\\n/g, "<br>"));
 });
 </script>
 
@@ -33,23 +34,23 @@ const description = computed(() => {
           <div class="flex flex-col w-full h-full max-w-[15vh] max-h-[15vh] rounded-xl shadow-lg border">
             <img
                 class="h-full w-full object-contain rounded-xl"
-                :src="product.photo_url"
-                :alt="product.name + ' | Novosad'"
+                :src="product?.photo_url"
+                :alt="product?.name + ' | Novosad'"
             />
           </div>
           <div
               class="flex flex-col justify-center items-center w-full h-full gap-4 p-4"
           >
             <div class="flex flex-row items-center justify-between w-full">
-              <Label class="text-xl italic">{{ product.name }}</Label>
+              <Label class="text-xl italic">{{ product?.name }}</Label>
               <Label class="bg-gray-100 text-gray-500 rounded-md px-2 py-1 hover:bg-gray-100">
-                ID: {{ product.id }}
+                ID: {{ product?.id }}
               </Label>
             </div>
             <div class="flex flex-row items-center gap-2 w-full">
               <Label class="text-md">Ціна:</Label>
               <Label class="text-md"
-              >{{ product.price }} грн. / {{ product.minimal_order }} шт.</Label
+              >{{ product?.price }} грн. / {{ product?.minimal_order }} шт.</Label
               >
             </div>
 
@@ -63,13 +64,13 @@ const description = computed(() => {
       <div
         class="flex flex-col items-center justify-around bg-gray gap-4 p-4 w-full max-w-sm h-full overflow-y-auto"
       >
-        <Label class="text-lg">Особливості товару</Label>
+        <Label class="text-lg">{{ t("fltr-product") }}</Label>
 
         <div class="w-full max-h-[200px] overflow-y-auto">
           <Table class="w-full">
             <TableBody class="w-full">
               <TableRow
-                v-for="[key, value] in Object.entries(product.attributes)"
+                v-for="[key, value] in Object.entries(product?.attributes)"
                 :key="key"
                 class="w-full"
               >

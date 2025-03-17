@@ -3,24 +3,24 @@ import {  } from '@/components/ui/separator';
 
 import { Trophy, Handshake, Truck } from "lucide-vue-next";
 import Label from "@/components/ui/label/Label.vue";
-
+const { t } = useI18n();
 const steps = [
   {
     step: 1,
-    title: "Висока якість продукції",
-    description: "Ми дбаємо про те, щоби кожен, куплений вами, саджанець був високої якості",
+    title: t("stepper-step1-header"),
+    description: t("stepper-step1-content"),
     icon: Trophy,
   },
   {
     step: 2,
-    title: "Швидка доставка здійснюється по всій Україні та в країни найближчого зарубіжжя",
-    description: "Наша місія не тільки заробляти кошти, але й залишати щиру посмішку на наших клієнтах, тим самим контролюємо, аби товари дійшли до вас швидко і без проблем",
+    title: t("stepper-step2-header"),
+    description: t("stepper-step2-content"),
     icon: Truck,
   },
   {
     step: 3,
-    title: "Надійне плече для вашого саду / городу",
-    description: "З моменту покупки товару у нас, ми завжди на поготові допомогти нашому клієнту зі всіма питаннями, котрі у нього виникатимуть, у тому ж числі під час догляду чи посадки саджанців",
+    title: t("stepper-step3-header"),
+    description: t("stepper-step3-content"),
     icon: Handshake,
   },
 ];
@@ -30,7 +30,7 @@ const steps = [
   <div class="max-h-[70vh] w-full flex flex-col items-center justify-start gap-14 p-8">
     <div>
       <Label class="text-3xl font-semibold text-center">
-        Переваги нашого магазину
+        {{ t("stepper-header") }}
       </Label>
     </div>
     <div class="flex flex-row items-stretch justify-between w-full gap-8">

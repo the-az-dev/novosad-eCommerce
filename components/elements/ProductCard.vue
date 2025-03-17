@@ -20,6 +20,7 @@ import { ref, watch, onUnmounted } from "vue";
 import ProductDrawerContent from "./ProductDrawerContent.vue";
 
 const isOpen = ref(false);
+const { t } = useI18n();
 
 watch(isOpen, (val) => {
   if (!val) {
@@ -65,8 +66,8 @@ const { product } = props;
     >
       <img
         class="h-full w-full object-cover"
-        :src="product.photo_url"
-        :alt="product.name + ' | Novosad'"
+        :src="product?.photo_url"
+        :alt="product?.name + ' | Novosad'"
       />
     </CardHeader>
     <CardContent class="p-4 flex flex-col gap-2">
@@ -74,31 +75,31 @@ const { product } = props;
         <Badge
           class="bg-gray-200 text-gray-700 rounded-md px-2 py-1 hover:bg-gray-200"
         >
-          {{ product.category.name }}
+          {{ product.category?.name }}
         </Badge>
         <CardTitle
-          >{{ product.price }} грн. / {{ product.minimal_order }} шт.</CardTitle
+          >{{ product?.price }} {{ t("product-item-price-quantity") }} / {{ product?.minimal_order }} {{ t("product-item-price-per-amount") }}</CardTitle
         >
       </CardDescription>
       <CardTitle
           class="text-lg font-semibold text-gray-900 w-full line-clamp-2"
       >
-        {{ product.name }}
+        {{ product?.name }}
       </CardTitle>
     </CardContent>
     <CardFooter class="flex justify-between p-4 w-full" v-if="showDrawer">
       <Drawer v-model:open="isOpen">
         <DrawerTrigger as-child>
           <Button class="w-full" variant="outline"
-            >Детальніше <i class="pi pi-search"></i
+            >{{ t("product-item-more-info") }} <i class="pi pi-search"></i
           ></Button>
         </DrawerTrigger>
         <DrawerContent class="p-4">
           <ProductDrawerContent :product="product" />
           <DrawerFooter>
-            <a :href="product.buy_link"
+            <a :href="product?.buy_link"
             ><Button class="bg-[#A020F0] hover:bg-[#A020F0] text-md w-full" size="lg"
-            >Замовити на Prom<i class="pi pi-shopping-cart"></i></Button
+            >{{ t("product-item-buy") }}}<i class="pi pi-shopping-cart"></i></Button
             ></a>
             <DrawerClose as-child>
               <Button variant="outline">Закрити</Button>
@@ -109,9 +110,9 @@ const { product } = props;
     </CardFooter>
     <CardFooter class="flex justify-between p-4 w-full" v-else>
       <NuxtLink :to="redirectLink" class="w-full"><Button class="w-full" variant="outline"
-        >Детальніше</Button></NuxtLink>
-      <NuxtLink :to="product.buy_link" class="w-full"><Button class="w-full" variant="ghost"
-      >Замовити</Button></NuxtLink>
+        >{{ t("product-item-more-info") }}</Button></NuxtLink>
+      <NuxtLink :to="product?.buy_link" class="w-full"><Button class="w-full" variant="ghost"
+      >{{ t("product-item-buy") }}}</Button></NuxtLink>
     </CardFooter>
   </Card>
 </template>

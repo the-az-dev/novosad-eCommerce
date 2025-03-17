@@ -5,23 +5,24 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+const { t } = useI18n();
 
 const accordionItems = [
   {
     value: "item-1",
-    title: "Скільки часу займає доставка?",
-    content: "Доставка товару займає зазвичай від 2-ох до 4-ох днів. Доставка реалізовується перевізником 'Нова Пошта' за рахунок покупця. У разі відсутності товару на складі, доставлення товару заматиме 2-3 тижня. За детальною інформацією звертайтесь до Новосада Сергія Миколайовича (+380-50-378-24-72).",
+    title: t("faq-q1-header"),
+    content: t("faq-g1-content"),
   },
   {
     value: "item-2",
-    title: "Чи можна придбати у вас товари ОПТ-ом?",
+    title: t("faq-q2-header"),
     content:
-      "Так. У нас є великий набір товарів, котрі можна купляти, як і оптом, так і у роздріб. Переглянути товари згідно ваших побажань можна на сторіці 'Каталог товарів'.",
+      t("faq-g2-content"),
   },
   {
     value: "item-3",
-    title: "До кого можна звернутись за консультацією щодо певного товару?",
-    content: "Усі контактні дані ви зможете знайти на сторінці 'Контакти'. Там ви знайдете контакти особи, котра вам допоможе із вашим питанням.",
+    title: t("faq-q3-header"),
+    content: t("faq-g3-content"),
   },
 ];
 </script>
@@ -32,7 +33,7 @@ const accordionItems = [
   >
   <div>
       <Label class="text-3xl font-semibold text-center"
-        >Часті запитання та відповіді</Label
+        >{{ t("faq-header") }}</Label
       >
     </div>
     <Accordion type="single" class="w-full max-w-[60%]" collapsible>
