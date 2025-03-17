@@ -17,65 +17,71 @@ const props = defineProps({
 });
 
 const { product } = props;
+const { t } = useI18n();
 
 const description = computed(() => {
-  return DOMPurify.sanitize(product.description.replace(/\\r\\n/g, "<br>"));
+  return DOMPurify.sanitize(product?.description.replace(/\\r\\n/g, "<br>"));
 });
 </script>
 
 <template>
   <div
-    class="flex flex-col items-center justify-center gap-4 w-full bg-white h-full max-h-3xl my-4 rounded-xl shadow-lg border p-6"
+    class="flex flex-col items-center justify-center gap-4 w-full bg-white h-full max-h-6xl min-h-6xl my-4 rounded-xl shadow-lg border "
   >
-    <div class="flex flex-row items-start justify-between p-4 gap-4 w-full">
-      <img
-        class="h-full w-full object-cover max-w-[30vh] max-h-[30vh] p-4"
-        :src="product.photo_url"
-        :alt="product.name + ' | Novosad'"
-      />
-      <div
-        class="flex flex-col justify-between w-full h-full max-w-6xl gap-4 p-4"
-      >
-        <div class="flex flex-row items-center justify-between w-full">
-          <Label class="text-xl italic">{{ product.name }}</Label>
-          <Badge class="bg-gray-200 text-gray-700 rounded-md px-2 py-1 hover:bg-gray-200">
-            {{ product.category.name }}
-          </Badge>
-        </div>
-        <div class="flex flex-row items-center justify-between w-full">
-          <Label class="text-md">Ціна:</Label>
-          <Label class="text-md"
-            >{{ product.price }} грн. / {{ product.minimal_order }} шт.</Label
+    <div class="flex flex-row items-start justify-around p-4 gap-4 w-full h-full">
+      <div class="flex flex-col justify-between w-full gap-4 p-6 h-full border-r">
+        <div class="flex flex-row justify-around items-center gap-4 w-full">
+          <div class="flex flex-col w-full h-full max-w-[15vh] max-h-[15vh] rounded-xl shadow-lg border">
+            <img
+                class="h-full w-full object-contain rounded-xl"
+                :src="product?.photo_url"
+                :alt="product?.name + ' | Novosad'"
+            />
+          </div>
+          <div
+              class="flex flex-col justify-center items-center w-full h-full gap-4 p-4"
           >
+            <div class="flex flex-row items-center justify-between w-full">
+              <Label class="text-xl italic">{{ product?.name }}</Label>
+              <Label class="bg-gray-100 text-gray-500 rounded-md px-2 py-1 hover:bg-gray-100">
+                ID: {{ product?.id }}
+              </Label>
+            </div>
+            <div class="flex flex-row items-center gap-2 w-full">
+              <Label class="text-md">Ціна:</Label>
+              <Label class="text-md"
+              >{{ product?.price }} грн. / {{ product?.minimal_order }} шт.</Label
+              >
+            </div>
+
+          </div>
         </div>
-        <DrawerDescription v-html="description">
-        </DrawerDescription>
+        <div class="flex flex-col gap-4 w-full py-4 border-t items-center justify-center h-full max-h-[35vh]">
+          <Label class="text-lg w-full border-b pb-4 text-center">Опис</Label>
+          <DrawerDescription v-html="description" class="overflow-y-auto overflow-x-hidden text-md" />
+        </div>
       </div>
       <div
-        class="h-full flex flex-col items-center justify-around bg-gray gap-4 p-4"
+        class="flex flex-col items-center justify-around bg-gray gap-4 p-4 w-full max-w-sm h-full overflow-y-auto"
       >
-        <Label class="text-lg">Особливості товару</Label>
+        <Label class="text-lg">{{ t("fltr-product") }}</Label>
 
         <div class="w-full max-h-[200px] overflow-y-auto">
           <Table class="w-full">
-            <TableBody>
+            <TableBody class="w-full">
               <TableRow
-                v-for="[key, value] in Object.entries(product.attributes)"
+                v-for="[key, value] in Object.entries(product?.attributes)"
                 :key="key"
+                class="w-full"
               >
-                <TableCell class="font-medium">{{ key }}</TableCell>
-                <TableCell class="text-center">{{ value }}</TableCell>
+                <TableCell class="font-medium text-center w-[40vh] border-r">{{ key }}</TableCell>
+                <TableCell class="text-center w-[40vh] border-l">{{ value }}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </div>
       </div>
     </div>
-    <div class="flex flex-row w-full items-center justify-end gap-2">
-      <a :href="product.buy_link"
-        ><Button class="bg-[#A020F0] hover:bg-[#A020F0] text-md" size="lg"
-          >Замовити на Prom<i class="pi pi-shopping-cart"></i></Button
-      ></a>
-    </div>
+
   </div>
 </template>

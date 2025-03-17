@@ -4,6 +4,7 @@ const { t } = useI18n();
 
 <template>
   <footer
+      id="footer"
     class="bg-black text-white mt-16 flex flex-col items-center justify-center p-[20px] w-full"
   >
     <div class="w-full m-auto p-auto px-4 py-8">

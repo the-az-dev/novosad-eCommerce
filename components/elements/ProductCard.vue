@@ -20,6 +20,7 @@ import { ref, watch, onUnmounted } from "vue";
 import ProductDrawerContent from "./ProductDrawerContent.vue";
 
 const isOpen = ref(false);
+const { t } = useI18n();
 
 watch(isOpen, (val) => {
   if (!val) {
@@ -49,7 +50,7 @@ const props = defineProps({
   redirectLink: {
     type: String,
     required: false,
-    default: '',
+    default: '#',
   }
 });
 
@@ -58,15 +59,15 @@ const { product } = props;
 
 <template>
   <Card
-    class="w-full max-w-[320px] shadow-lg border border-gray-300 rounded-xl bg-white"
+    class="w-full max-w-[320px] min-w-[320px] h-full shadow-lg border border-gray-300 rounded-xl bg-white opacity-0 animate-fade-up"
   >
     <CardHeader
       class="h-48 bg-gray-100 flex items-center justify-center rounded-t-lg overflow-hidden"
     >
       <img
         class="h-full w-full object-cover"
-        :src="product.photo_url"
-        :alt="product.name + ' | Novosad'"
+        :src="product?.photo_url"
+        :alt="product?.name + ' | Novosad'"
       />
     </CardHeader>
     <CardContent class="p-4 flex flex-col gap-2">
@@ -74,26 +75,32 @@ const { product } = props;
         <Badge
           class="bg-gray-200 text-gray-700 rounded-md px-2 py-1 hover:bg-gray-200"
         >
-          {{ product.category.name }}
+          {{ product.category?.name }}
         </Badge>
         <CardTitle
-          >{{ product.price }} грн. / {{ product.minimal_order }} шт.</CardTitle
+          >{{ product?.price }} {{ t("product-item-price-quantity") }} / {{ product?.minimal_order }} {{ t("product-item-price-per-amount") }}</CardTitle
         >
       </CardDescription>
-      <CardTitle class="text-lg font-semibold text-gray-900">
-        {{ product.name }}
+      <CardTitle
+          class="text-lg font-semibold text-gray-900 w-full line-clamp-2"
+      >
+        {{ product?.name }}
       </CardTitle>
     </CardContent>
     <CardFooter class="flex justify-between p-4 w-full" v-if="showDrawer">
       <Drawer v-model:open="isOpen">
         <DrawerTrigger as-child>
           <Button class="w-full" variant="outline"
-            >Детальніше <i class="pi pi-search"></i
+            >{{ t("product-item-more-info") }} <i class="pi pi-search"></i
           ></Button>
         </DrawerTrigger>
         <DrawerContent class="p-4">
           <ProductDrawerContent :product="product" />
           <DrawerFooter>
+            <a :href="product?.buy_link"
+            ><Button class="bg-[#A020F0] hover:bg-[#A020F0] text-md w-full" size="lg"
+            >{{ t("product-item-buy") }}}<i class="pi pi-shopping-cart"></i></Button
+            ></a>
             <DrawerClose as-child>
               <Button variant="outline">Закрити</Button>
             </DrawerClose>
@@ -103,8 +110,9 @@ const { product } = props;
     </CardFooter>
     <CardFooter class="flex justify-between p-4 w-full" v-else>
       <NuxtLink :to="redirectLink" class="w-full"><Button class="w-full" variant="outline"
-        >Детальніше <i class="pi pi-search"></i
-      ></Button></NuxtLink>
+        >{{ t("product-item-more-info") }}</Button></NuxtLink>
+      <NuxtLink :to="product?.buy_link" class="w-full"><Button class="w-full" variant="ghost"
+      >{{ t("product-item-buy") }}}</Button></NuxtLink>
     </CardFooter>
   </Card>
 </template>

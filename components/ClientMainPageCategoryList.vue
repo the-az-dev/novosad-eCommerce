@@ -24,7 +24,7 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
 const { data, status, error } = await useFetch(
-  "http://localhost:8089/products/category/get"
+  "http://185.65.244.209:8089/products/category/get?locale=" + locale.value,
 );
 
 const categories = data.value?.data;
@@ -32,13 +32,10 @@ const categories = data.value?.data;
 
 <template>
   <div
-    class="max-h-[60vh] w-full flex flex-col items-center justify-between gap-4 p-8 pb-8"
+    class="max-h-[60vh] w-full flex flex-col items-center justify-between gap-14 p-8 pb-8"
   >
-    <div class="flex flex-row justify-between items-center w-full max-w-7xl">
-      <Label class="text-2xl font-semibold">Асортимент нашої крамнички</Label>
-      <NuxtLink :to="'/category'">
-        <Button variant="outline" class="text-md">Більше</Button>
-      </NuxtLink>
+    <div class="flex flex-row justify-center items-center w-full max-w-7xl">
+      <Label class="text-3xl font-semibold">{{ t("home-category-section-title") }}</Label>
     </div>
     <NavigationMenu
       class="w-full max-w-7xl mx-auto px-4"

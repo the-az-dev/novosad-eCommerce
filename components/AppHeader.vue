@@ -35,7 +35,7 @@ const localePath = useLocalePath();
           }}</NuxtLink>
         </li>
         <li class="mr-9">
-          <NuxtLink :to="localePath('contacts')" rel="canonical">{{
+          <NuxtLink to="#footer" rel="canonical">{{
             t("nav-contact-title")
           }}</NuxtLink>
         </li>

@@ -25,6 +25,16 @@ useHead({
     {
       rel: "preload",
       as: "image",
+      href: "/img/main-page/gallery/2.jpg",
+    },
+    {
+      rel: "preload",
+      as: "image",
+      href: "/img/main-page/gallery/3.jpg",
+    },
+    {
+      rel: "preload",
+      as: "image",
       href: "/img/main-page/gallery/4.jpg",
     },
     {
@@ -57,6 +67,7 @@ useHead({
 
 const gallery_img = [
   "/img/main-page/gallery/1.jpg",
+  "/img/main-page/gallery/3.jpg",
   "/img/main-page/gallery/4.jpg",
   "/img/main-page/gallery/5.jpg",
   "/img/main-page/gallery/7.jpg",
