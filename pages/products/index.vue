@@ -183,7 +183,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="w-full max-h-[40vh] px-8 py-8 flex flex-col gap-6 border-b">
     <div
-      class="w-full bg-[#bcaf45] flex flex-row items-center justify-start max-h-2"
+      class="w-full flex flex-row items-center justify-start max-h-2"
     >
       <Breadcrumb>
         <BreadcrumbList>
