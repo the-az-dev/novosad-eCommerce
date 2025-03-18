@@ -236,7 +236,12 @@ useHead({
       type: 'image/ico',
       href: '/favicon.ico'
     }
-  ]
+  ],
+  meta: {
+    charset: 'utf-8',
+    httpEquiv: 'refresh',
+  }
+}
 });
 </script>
 
@@ -265,7 +270,7 @@ useHead({
   </div>
 
   <div
-      class="p-8 w-full flex gap-8 flex-row overflow-hidden transition-[height] duration-300"
+      class="p-8 w-full flex gap-8 flex-col md:flex-row lg:flex-row overflow-hidden transition-[height] duration-300 items-center md:items-start lg:items-start justify-center"
       :style="{ 'min-height': loading ? '42.5vh' : (products.length ? 'auto' : '42.5vh') }"
   >
     <!-- Фільтри -->
