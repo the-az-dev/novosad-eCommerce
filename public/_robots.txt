@@ -1,0 +1,9 @@
+
+# START nuxt-robots (indexing disabled)
+User-agent: *
+Disallow:
+
+# DEVELOPMENT HINTS:
+# - Indexing is blocked in development. You can mock a production environment with ?mockProductionEnv query.
+
+# END nuxt-robots

@@ -98,8 +98,7 @@ const { product } = props;
       <Drawer v-model:open="isOpen">
         <DrawerTrigger as-child>
           <Button class="w-full" variant="outline"
-            >{{ t("product-item-more-info") }} <i class="pi pi-search"></i
-          ></Button>
+            >{{ t("product-item-more-info") }}</Button>
         </DrawerTrigger>
         <DrawerContent class="p-4">
           <ProductDrawerContent :product="product" />
