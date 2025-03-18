@@ -237,11 +237,6 @@ useHead({
       href: '/favicon.ico'
     }
   ],
-  meta: {
-    charset: 'utf-8',
-    httpEquiv: 'refresh',
-  }
-}
 });
 </script>
 
@@ -254,7 +249,7 @@ useHead({
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink>
-              <a href="/" class="text-md"> {{ t("nav-home-title") }} </a>
+              <a :href="localePath('index')" rel="canonical" class="text-md"> {{ t("nav-home-title") }} </a>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

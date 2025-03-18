@@ -110,13 +110,13 @@ useHead({
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink>
-              <a href="/" class="text-md"> {{ t("nav-home-title") }} </a>
+              <a :href="localePath('index')" rel="canonical" class="text-md"> {{ t("nav-home-title") }} </a>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink>
-              <a href="/blog" class="text-md"> {{ t("article-page-name") }} </a>
+              <a :href="localePath('blog')" rel="canonical" class="text-md"> {{ t("article-page-name") }} </a>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

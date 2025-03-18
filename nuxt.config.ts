@@ -8,25 +8,6 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
-        {
-          src: "https://www.googletagmanager.com/gtag/js?id=G-D023GRZM81",
-          async: true,
-        },
-        {
-          textContent: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-D023GRZM81');
-            gtag('consent', 'default', {
-              'ad_storage': 'denied',
-              'ad_user_data': 'denied',
-              'ad_personalization': 'denied',
-              'analytics_storage': 'denied'
-            });
-          `,
-          type: "text/javascript",
-        },
       ],
     },
   },
@@ -69,7 +50,7 @@ export default defineNuxtConfig({
   },
   robots: {
     disallow: [],
-    sitemap: "https://novosad.pp.ua/sitemap.xml",
+    sitemap: "http://novosad.pp.ua/sitemap_index.xml",
   },
   gtm: {
     id: "GTM-PSNBGB7P",
