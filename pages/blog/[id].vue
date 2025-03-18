@@ -47,7 +47,7 @@ function decorateContent(htmlContent: string) {
           nextSub = false;
           paragraph.classList.add('text-center', 'w-full', 'my-auto', 'top-auto', 'text-gray-400');
         }
-        else paragraph.classList.add('text-center', 'w-full', 'my-auto', 'top-[-50%]');
+        else paragraph.classList.add( 'w-full', 'my-auto', 'top-[-50%]');
          // Додаємо клас для звичайних параграфів
       }
     })
@@ -102,7 +102,7 @@ useHead({
 </script>
 
 <template>
-  <div class="w-full max-h-[40vh] px-8 py-8 flex flex-col gap-6 border-b">
+  <div class="w-full px-8 py-8 flex flex-col gap-6 border-b">
     <div
         class="w-full flex flex-row items-center justify-start max-h-2"
     >
@@ -121,23 +121,22 @@ useHead({
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage class="text-md">{{ post?.title }}</BreadcrumbPage>
+            <BreadcrumbPage class="text-[calc(sm-1.5rem)] md:text-md lg:text-md">{{ post?.title }}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
     </div>
-    <div class="w-full mx-auto">
-      <Label class="text-3xl">{{ post?.title }}</Label>
+    <div class="w-full mx-auto sm:py-8">
+      <Label class=" text-lg md:text-2xl lg:text-3xl">{{ post?.title }}</Label>
     </div>
   </div>
-  <div v-html="decoratedContent" class="article-content p-8 text-lg flex flex-col items-center justify-center min-w-[100vh] max-w-[100vh] border my-8 rounded-xl"></div>
+  <div v-html="decoratedContent" class="article-content p-8 text-lg flex flex-col items-center justify-center border my-8 mx-8 rounded-xl"></div>
 </template>
 
 <style scoped>
 .article-content a{
   width: 100%;
   display: block;
-  max-width: 10vh;
 }
 
 .article-content img{

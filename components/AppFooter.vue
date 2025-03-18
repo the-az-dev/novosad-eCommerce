@@ -5,19 +5,18 @@ const { t } = useI18n();
 <template>
   <footer
       id="footer"
-    class="bg-black text-white mt-16 flex flex-col items-center justify-center p-[20px] w-full"
+    class="bg-black text-white flex flex-col items-center justify-center px-[20px] py-14 w-full h-full px-8"
   >
-    <div class="w-full m-auto p-auto px-4 py-8">
       <div class="flex flex-row items-center justify-center w-full">
         <div class="flex flex-col items-center w-full justify-center">
           <h4 class="text-lg font-semibold mb-4">
             {{ t("footer-contact-title") }}
           </h4>
           <div
-            class="flex flex-row items-center justify-center w-full gap-[50px]"
+            class="flex flex-col md:flex-row lg:flex-row items-center justify-center w-full gap-[50px]"
           >
-            <ul class="space-y-2 text-gray-300 w-[250px]">
-              <li class="font-semibold">
+            <ul class="space-y-2 text-gray-300 w-[250px] text-center">
+              <li class="font-semibold text-center">
                 {{ t("footer-contact-otp-plants-title") }}
               </li>
               <li>{{ t("footer-email-title") }} novosadsm@ukr.net</li>
@@ -26,7 +25,7 @@ const { t } = useI18n();
                 {{ t("novosad-contact-sm-full-name") }}
               </li>
             </ul>
-            <ul class="space-y-2 text-gray-300 w-[250px]">
+            <ul class="space-y-2 text-gray-300 w-[250px] text-center">
               <li class="font-semibold">
                 {{ t("footer-contact-single-plant-title") }}
               </li>
@@ -39,7 +38,7 @@ const { t } = useI18n();
                 {{ t("novosad-contact-sm-full-name") }}
               </li>
             </ul>
-            <ul class="space-y-2 text-gray-300 w-[250px]">
+            <ul class="space-y-2 text-gray-300 w-[250px] text-center">
               <li class="font-semibold">
                 {{ t("footer-contact-security-plant-title") }}
               </li>
@@ -49,7 +48,7 @@ const { t } = useI18n();
                 {{ t("novosad-contact-ss-full-name") }}
               </li>
             </ul>
-            <ul class="space-y-2 text-gray-300 w-[250px]">
+            <ul class="space-y-2 text-gray-300 w-[250px] text-center">
               <li class="font-semibold">
                 {{ t("footer-contact-boilerplates-title") }}
               </li>
@@ -63,9 +62,9 @@ const { t } = useI18n();
         </div>
       </div>
       <div
-        class="border-t border-gray-600 mt-8 pt-8 flex flex-row items-center justify-around"
+        class="border-t border-gray-600 mt-8 pt-8 flex flex-col md:flex-row lg:flex-row items-center justify-center w-full gap-12"
       >
-        <div class="w-full max-w-[30vh]">
+        <div class="text-center">
           <h4 class="text-lg font-semibold mb-4">
             {{ t("footer-address-title") }}
           </h4>
@@ -73,9 +72,9 @@ const { t } = useI18n();
             <li>{{ t("footer-address-content") }}</li>
           </ul>
         </div>
-        <div>
-          <p>{{ t("footer-social-media-title") }}</p>
-          <ul class="flex flex-row gap-[10px] items-center mt-[20px]">
+        <div class="flex flex-col items-center justify-around">
+          <Label class="text-lg font-semibold">{{ t("footer-social-media-title") }}</Label>
+          <ul class="flex flex-row items-center justify-center mt-[20px] w-full gap-12">
             <li>
               <NuxtLink to="https://novosad.prom.ua/ua/">
                 <img
@@ -87,8 +86,8 @@ const { t } = useI18n();
             <li>
               <NuxtLink to="https://www.facebook.com/novosadinua">
                 <img
-                  width="48"
-                  height="48"
+                  width="50"
+                  height="50"
                   src="https://img.icons8.com/fluency/48/facebook-new.png"
                   alt="facebook-new"
               /></NuxtLink>
@@ -96,13 +95,14 @@ const { t } = useI18n();
           </ul>
         </div>
       </div>
+
+
       <div
-        class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400 flex flex-row items-center justify-center"
+        class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400 flex flex-row items-center justify-center w-full text-center"
       >
         <p>
           &copy; {{ new Date().getFullYear() + " " + t("company-nane") + " " + t("all-copy-secured-footer-title") }}
         </p>
       </div>
-    </div>
   </footer>
 </template>

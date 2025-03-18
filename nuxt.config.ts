@@ -3,9 +3,6 @@ import type { NuxtPage } from "nuxt/schema";
 export default defineNuxtConfig({
   nitro: {
     serveStatic: true,
-    prerender: {
-      routes: ['/', '/uk', '/ru', '/uk/products', '/uk/blog', '/uk/orders', '/ru/blog', '/ru/products', '/ru/orders'] // або всі потрібні маршрути
-    }
   },
   ssr: false,
   app: {
@@ -45,6 +42,7 @@ export default defineNuxtConfig({
     url: "http://novosad.pp.ua",
     name: "Магазин 'Novosad'",
   },
+
   compatibilityDate: "2024-11-01",
   devtools: {
     enabled: true,
