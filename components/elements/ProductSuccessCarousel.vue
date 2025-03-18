@@ -32,7 +32,7 @@ const pagination = computed(() => data.value?.pages || {})
           :key="product?.name"
           class="w-full sm:basis-1 md:basis-2/2 lg:basis-1/3 flex justify-center p-6"
         >
-          <ProductCard :product="product"/>
+          <ProductCard :product="product" :is-main-page="true"/>
         </CarouselItem>
       </CarouselContent>
       <CarouselPrevious />

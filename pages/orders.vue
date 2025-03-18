@@ -161,7 +161,7 @@ useHead({
   </div>
 
   <div class="h-full w-full p-6 flex flex-col gap-6 md:gap-12 items-stretch justify-around">
-    <Card class="rounded-xl shadow-lg border flex-1 p-6 flex flex-row items-center gap-6">
+    <Card class="rounded-xl shadow-lg border flex-1 p-6 flex flex-col md:flex-row lg:flex-row items-center gap-6">
       <CardHeader class="w-32 h-32 flex items-center justify-center">
         <img
             src="https://img.icons8.com/cotton/100/fast-cart.png"
@@ -170,7 +170,7 @@ useHead({
         />
       </CardHeader>
       <CardContent class="flex flex-col items-start w-full gap-4">
-        <Label class="text-xl font-semibold">
+        <Label class="text-xl font-semibold w-full">
           {{ t("order-title") }}
         </Label>
         <p class="text-md italic w-full break-words whitespace-pre-line">
@@ -179,7 +179,7 @@ useHead({
         <Form v-slot="{ handleSubmit }" as="" keep-values :validation-schema="formSchema" >
           <Dialog>
             <DialogTrigger as-child>
-              <Button class="text-white px-6 py-4 text-[20px] p-2">
+              <Button class="text-white px-6 py-4 text-[20px] p-2 w-full md:w-[25vh] lg:w-[25vh]">
                 {{ t("order-open-modal") }}
               </Button>
             </DialogTrigger>
@@ -243,7 +243,7 @@ useHead({
       </CardContent>
     </Card>
 
-    <Card class="rounded-xl shadow-lg border flex-1 p-6 flex flex-row items-center gap-6">
+    <Card class="rounded-xl shadow-lg border flex-1 p-6 flex flex-col md:flex-row lg:flex-row items-center gap-6">
       <CardHeader class="w-32 h-32 flex items-center justify-center">
         <img
             src="https://img.icons8.com/cotton/100/delivery.png"

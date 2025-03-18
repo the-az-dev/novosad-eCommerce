@@ -17,26 +17,26 @@ const accordionItems = [
     value: "item-2",
     title: t("faq-q2-header"),
     content:
-      t("faq-q1-content"),
+      t("faq-q2-content"),
   },
   {
     value: "item-3",
     title: t("faq-q3-header"),
-    content: t("faq-q1-content"),
+    content: t("faq-q3-content"),
   },
 ];
 </script>
 
 <template>
   <div
-    class="w-full max-h-[60vh] flex flex-col items-center justify-between p-14 gap-12"
+    class="w-full h-full flex flex-col items-center justify-between p-9 md:p-14 gap-12"
   >
-  <div>
+  <div class="flex flex-col items-center justify-start">
       <Label class="text-3xl font-semibold text-center"
         >{{ t("faq-header") }}</Label
       >
     </div>
-    <Accordion type="single" class="w-full max-w-[60%]" collapsible>
+    <Accordion type="single" class="w-full" collapsible>
       <AccordionItem
         v-for="item in accordionItems"
         :key="item.value"

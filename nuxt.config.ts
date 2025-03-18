@@ -2,7 +2,7 @@ import type { NuxtPage } from "nuxt/schema";
 
 export default defineNuxtConfig({
   nitro: {
-    serveStatic: true
+    serveStatic: true,
   },
   ssr: false,
   app: {
@@ -42,6 +42,7 @@ export default defineNuxtConfig({
     url: "http://novosad.pp.ua",
     name: "Магазин 'Novosad'",
   },
+
   compatibilityDate: "2024-11-01",
   devtools: {
     enabled: true,
@@ -60,6 +61,7 @@ export default defineNuxtConfig({
     "nuxt-vuefire",
     "nuxt-simple-sitemap",
     'reka-ui/nuxt',
+    "@nuxt/image",
   ],
   tailwindcss: {
     exposeConfig: true,
@@ -101,7 +103,8 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "i18n_redirected",
-      redirectOn: "root",
+      alwaysRedirect: true,
+      fallbackLocale: 'uk'
     },
   },
   sitemap: {

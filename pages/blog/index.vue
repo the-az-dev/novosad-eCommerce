@@ -22,9 +22,9 @@
     </div>
   </div>
 
-  <div class="w-full flex flex-row items-center justify-between max-h-4 p-6 gap-4">
+  <div class="w-full flex flex-col md:flex-row lg:flex-row items-center justify-between p-4 gap-4">
     <Select v-model="selectedCategory">
-      <SelectTrigger class="h-full w-full max-w-[30vh]">
+      <SelectTrigger class="h-full w-full md:max-w-[30vh] lg:max-w-[30vh]">
         <SelectValue :placeholder="t('article-category-all-selection')" />
       </SelectTrigger>
       <SelectContent>
@@ -49,7 +49,7 @@
     <div
         v-for="post in posts"
         :key="post?.id"
-        class="flex flex-row md:flex-row items-center w-full p-6 mb-6 gap-8 border rounded-xl shadow-sm bg-white hover:shadow-xl transition-all duration-300"
+        class="flex flex-col md:flex-row lg:flex-row items-center w-full p-6 mb-6 gap-8 border rounded-xl shadow-sm bg-white hover:shadow-xl transition-all duration-300"
     >
       <!-- IMAGE BLOCK -->
       <div class="w-[200px] h-[140px] flex-shrink-0 overflow-hidden rounded-xl">
@@ -61,14 +61,14 @@
       </div>
 
       <!-- TEXT BLOCK -->
-      <div class="flex flex-row justify-between flex-1 pl-4 w-full gap-8 items-center h-full">
+      <div class="flex flex-col md:flex-row lg:flex-row justify-between flex-1 pl-4 w-full gap-8 items-center h-full">
         <div class="flex flex-col justify-between h-full gap-4">
-          <h3 class="text-lg font-semibold leading-snug line-clamp-2">
+          <h3 class="text-lg font-semibold leading-snug line-clamp-2 sm:w-full text-center">
             {{ post.title }}
           </h3>
           <p class="text-sm text-gray-500 flex flex-col items-center text-ellipsis" v-html="post.description.slice(0, 512) + '...'"></p>
         </div>
-        <div class="w-[30vh] mx-4">
+        <div class="w-full md:lg:w-[30vh] lg:w-[30vh] mx-4 flex flex-row items-center justify-center">
           <a :href="localePath('blog') + '/' + post.id" rel="canonical" target="_blank">
             <Button class="rounded-full p-6 text-md">{{ t("article-read-more") }}</Button>
           </a>
@@ -215,7 +215,7 @@ useHead({
     {
       rel: 'icon',
       type: 'image/ico',
-      href: '/_favicon.ico'
+      href: '/favicon.ico'
     }
   ]
 });

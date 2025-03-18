@@ -48,6 +48,15 @@ const max_price = ref(0)
 const min_price = ref(0)
 const config = useRuntimeConfig();
 
+const formatDate = (isoDate: string) => {
+  const date = new Date(isoDate);
+  return date.toLocaleDateString(locale.value, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 // Динамічне обчислення активної категорії
 const selectedCategory = computed(() => {
   return categories.value.find((cat) => cat.id === selectedCategoryId.value);
@@ -172,7 +181,7 @@ const applyFilters = () => {
 };
 
 const notFound = computed(() => {
-  return !!((products.value.length === 0 && !loading.value) || searchedName.value !== "" || min_price.value || max_price.value && selectedCategory.value || selectedSubcategoryId.value);
+  return !!((products.value.length === 0 && !loading.value) || (searchedName.value !== "" && min_price.value && max_price.value && selectedCategory.value && selectedSubcategoryId.value));
 })
 
 onMounted(async () => {
@@ -182,6 +191,57 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   isMounted = false;
+});
+
+
+
+const meta = {
+  uk: {
+    title:  `${ t("nav-product-title") } - Магазин 'Novosad'`,
+    description:
+        "Якісні саджанці з Європи. Саджанці полуниці 'Фриго' прямо з місця їх росту, розсадники різноманітних плодових дерев та ягідних культур. Доставка по всій території України.",
+    lang: "uk-UA",
+    url: "http://novosad.pp.ua/uk/products",
+  },
+  ru: {
+    title: `${ t("nav-product-title") } - Магазин 'Novosad'`,
+    description:
+        "Качественные саженцы из Европы. Саженцы клубники 'Фриго' прямо с места их роста, питомники разнообразных плодовых деревьев и ягодных культур. Доставка по всей территории Украины.",
+    lang: "ru-RU",
+    url: "http://novosad.pp.ua/ru/products",
+  },
+};
+
+
+useSeoMeta({
+  title: meta[locale.value].title,
+  description: meta[locale.value].description,
+  ogTitle: meta[locale.value].title,
+  ogDescription: meta[locale.value].description,
+  ogImage: "/img/og-image.png",
+  ogUrl: meta[locale.value].url,
+  twitterTitle: meta[locale.value].title,
+  twitterDescription: meta[locale.value].description,
+  twitterImage: "/img/og-image.png",
+  twitterCard: "summary",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: meta[locale.value].lang,
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/ico',
+      href: '/favicon.ico'
+    }
+  ],
+  meta: {
+    charset: 'utf-8',
+    httpEquiv: 'refresh',
+  }
+}
 });
 </script>
 
@@ -210,12 +270,12 @@ onBeforeUnmount(() => {
   </div>
 
   <div
-      class="p-8 w-full flex gap-8 flex-row overflow-hidden transition-[height] duration-300"
+      class="p-8 w-full flex gap-8 flex-col md:flex-row lg:flex-row overflow-hidden transition-[height] duration-300 items-center md:items-start lg:items-start justify-center"
       :style="{ 'min-height': loading ? '42.5vh' : (products.length ? 'auto' : '42.5vh') }"
   >
     <!-- Фільтри -->
     <aside
-      class="w-full min-w-[30vh] max-w-[30vh] bg-white p-6 rounded-xl shadow-lg border h-auto flex flex-col min-h-screen justify-between items-center"
+      class="w-full min-w-[30vh] max-w-[30vh] bg-white p-6 rounded-xl shadow-lg border h-full flex flex-col justify-between items-center"
     >
       <div class="w-full flex flex-col items-center gap-2">
         <h2 class="text-xl font-semibold mb-4">{{ t("product-filters-title") }}</h2>
@@ -345,11 +405,11 @@ onBeforeUnmount(() => {
       class="w-full flex flex-wrap gap-4 h-full justify-center items-center"
     >
       <NavigationMenu v-if="!loading" class="w-full">
-        <div class="flex flex-wrap justify-start gap-4 w-full">
+        <div class="flex flex-wrap justify-center gap-4 w-full">
           <div
             v-for="(product, index) in products"
             :key="product?.id"
-            class="w-[calc(1-0.5rem)] sm:w-[calc(2-0.5rem)] md:w-[calc(3-0.5rem)] lg:w-[calc(4-0.5rem)] xl:w-[calc(5-0.5rem)]"
+            class="w-[calc(1-0.5rem)] sm:w-[calc(2-0.5rem)] md:w-[calc(3-0.5rem)] lg:w-[calc(4-0.5rem)] xl:w-[calc(5-0.5rem)] "
           >
             <div
                 v-if="!loading"
@@ -359,6 +419,7 @@ onBeforeUnmount(() => {
               <ProductCard
                   :product="product"
                   :show-drawer="true"
+                  :is-main-page="false"
               />
             </div>
           </div>
