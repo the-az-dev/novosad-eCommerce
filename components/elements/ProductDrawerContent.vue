@@ -77,7 +77,7 @@ const formatDate = (isoDate: string) => {
       >
         <Label class="text-lg">{{ t("fltr-product") }}</Label>
 
-        <div class="w-full max-h-[200px] overflow-y-auto">
+        <div class="w-full overflow-y-auto">
           <Table class="w-full">
             <TableBody class="w-full">
               <TableRow>
