@@ -60,6 +60,7 @@ export default defineNuxtConfig({
     "nuxt-vuefire",
     "nuxt-simple-sitemap",
     'reka-ui/nuxt',
+    "@nuxt/image",
   ],
   tailwindcss: {
     exposeConfig: true,
