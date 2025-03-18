@@ -21,7 +21,7 @@ post.value = res?.data[0];
 const decoratedContent = ref('');
 
 onMounted(() => {
-  decoratedContent.value = decorateContent(post.value?.description.replace(/\&nbsp;/g, ''));
+  decoratedContent.value = decorateContent(post.value?.description.replace(/\&nbsp;/g, '').replace(/\n/g, '<br>').replace(/\t/g, '    '));
 });
 
 function decorateContent(htmlContent: string) {
@@ -29,19 +29,26 @@ function decorateContent(htmlContent: string) {
   const doc = parser.parseFromString(htmlContent, 'text/html');
 
   const paragraphs = doc.body.querySelectorAll('p');
+  let nextSub = false ;
 
   paragraphs.forEach(paragraph => {
     const linkImages = paragraph.querySelectorAll('a');
     linkImages.forEach(linkImage => {
       const hasImages = linkImage.querySelectorAll('img').length > 0;
       if (hasImages) {
-        paragraph.classList.add('flex', 'flex-row', 'items-center', 'justify-center', 'max-h-2', 'w-full', 'gap-8', 'mx-6', 'p-4');
-        linkImage.classList.add('w-[500px]', 'h-[500px]', 'flex-shrink-0', 'overflow-hidden', 'rounded-xl');
+        paragraph.classList.add('flex', 'flex-row', 'items-center', 'justify-center', 'max-h-[90vh]', 'w-full', 'max-w-[90vh]', 'gap-8', 'mx-6', 'p-8');
+        linkImage.classList.add('rounded-xl');
         linkImage.querySelectorAll('img').forEach(image => {
-          image.classList.add('w-full', 'h-full', 'object-cover', 'rounded-xl');
+          image.classList.add('w-full', 'h-full', 'rounded-xl', 'object-contain');
         })
+        nextSub = true;
       } else {
-        paragraph.classList.add('text-paragraph'); // Додаємо клас для звичайних параграфів
+        if(nextSub) {
+          nextSub = false;
+          paragraph.classList.add('text-center', 'w-full', 'my-auto', 'top-auto', 'text-gray-400');
+        }
+        else paragraph.classList.add('text-center', 'w-full', 'my-auto', 'top-[-50%]');
+         // Додаємо клас для звичайних параграфів
       }
     })
   });
@@ -51,18 +58,18 @@ function decorateContent(htmlContent: string) {
 
 const meta = {
   uk: {
-    title: post?.title + " - Магазин 'Novosad'",
+    title: post.value?.title + " - Магазин 'Novosad'",
     description:
         "Якісні саджанці з Європи. Саджанці полуниці 'Фриго' прямо з місця їх росту, розсадники різноманітних плодових дерев та ягідних культур. Доставка по всій території України.",
     lang: "uk-UA",
-    url: "http://novosad.pp.ua/uk/blog/"+post?.id,
+    url: "http://novosad.pp.ua/uk/blog/"+post.value?.id,
   },
   ru: {
-    title: post?.title + " - Магазин 'Novosad'",
+    title: post.value?.title + " - Магазин 'Novosad'",
     description:
         "Качественные саженцы из Европы. Саженцы клубники 'Фриго' прямо с места их роста, питомники разнообразных плодовых деревьев и ягодных культур. Доставка по всей территории Украины.",
     lang: "ru-RU",
-    url: "http://novosad.pp.ua/ru/blog/"+post?.id,
+    url: "http://novosad.pp.ua/ru/blog/"+post.value?.id,
   },
 };
 
@@ -123,12 +130,18 @@ useHead({
       <Label class="text-3xl">{{ post?.title }}</Label>
     </div>
   </div>
-  <div v-html="decoratedContent" class="article-content p-8 text-lg"></div>
+  <div v-html="decoratedContent" class="article-content p-8 text-lg flex flex-col items-center justify-center min-w-[100vh] max-w-[100vh] border my-8 rounded-xl"></div>
 </template>
 
 <style scoped>
-.article-content {
-  line-height: 1.6;
-  white-space: normal;
+.article-content a{
+  width: 100%;
+  display: block;
+  max-width: 10vh;
+}
+
+.article-content img{
+  width: 100%;
+  object-fit: contain;
 }
 </style>
