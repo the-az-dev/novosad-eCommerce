@@ -192,6 +192,52 @@ onMounted(async () => {
 onBeforeUnmount(() => {
   isMounted = false;
 });
+
+
+
+const meta = {
+  uk: {
+    title:  `${ t("nav-product-title") } - Магазин 'Novosad'`,
+    description:
+        "Якісні саджанці з Європи. Саджанці полуниці 'Фриго' прямо з місця їх росту, розсадники різноманітних плодових дерев та ягідних культур. Доставка по всій території України.",
+    lang: "uk-UA",
+    url: "http://novosad.pp.ua/uk/products",
+  },
+  ru: {
+    title: `${ t("nav-product-title") } - Магазин 'Novosad'`,
+    description:
+        "Качественные саженцы из Европы. Саженцы клубники 'Фриго' прямо с места их роста, питомники разнообразных плодовых деревьев и ягодных культур. Доставка по всей территории Украины.",
+    lang: "ru-RU",
+    url: "http://novosad.pp.ua/ru/products",
+  },
+};
+
+
+useSeoMeta({
+  title: meta[locale.value].title,
+  description: meta[locale.value].description,
+  ogTitle: meta[locale.value].title,
+  ogDescription: meta[locale.value].description,
+  ogImage: "/img/og-image.png",
+  ogUrl: meta[locale.value].url,
+  twitterTitle: meta[locale.value].title,
+  twitterDescription: meta[locale.value].description,
+  twitterImage: "/img/og-image.png",
+  twitterCard: "summary",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: meta[locale.value].lang,
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/ico',
+      href: '/favicon.ico'
+    }
+  ]
+});
 </script>
 
 <template>
@@ -354,11 +400,11 @@ onBeforeUnmount(() => {
       class="w-full flex flex-wrap gap-4 h-full justify-center items-center"
     >
       <NavigationMenu v-if="!loading" class="w-full">
-        <div class="flex flex-wrap justify-start gap-4 w-full">
+        <div class="flex flex-wrap justify-center gap-4 w-full">
           <div
             v-for="(product, index) in products"
             :key="product?.id"
-            class="w-[calc(1-0.5rem)] sm:w-[calc(2-0.5rem)] md:w-[calc(3-0.5rem)] lg:w-[calc(4-0.5rem)] xl:w-[calc(5-0.5rem)]"
+            class="w-[calc(1-0.5rem)] sm:w-[calc(2-0.5rem)] md:w-[calc(3-0.5rem)] lg:w-[calc(4-0.5rem)] xl:w-[calc(5-0.5rem)] "
           >
             <div
                 v-if="!loading"

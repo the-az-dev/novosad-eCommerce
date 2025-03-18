@@ -92,11 +92,10 @@ const gallery_img = [
         :key="img"
         class="w-full h-[200px] md:h-[300px] lg:h-[400px] flex flex-col items-center justify-center"
       >
-        <NuxtImg
+        <img
           :src="img"
           alt="Novosad Photo | Header Main"
           class="w-full h-full object-cover object-top rounded-lg"
-          format="webp"
         />
       </CarouselItem>
     </CarouselContent>

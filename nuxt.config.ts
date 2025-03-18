@@ -2,7 +2,10 @@ import type { NuxtPage } from "nuxt/schema";
 
 export default defineNuxtConfig({
   nitro: {
-    serveStatic: true
+    serveStatic: true,
+    prerender: {
+      routes: ['/', '/uk', '/ru', '/uk/products', '/uk/blog', '/uk/orders', '/ru/blog', '/ru/products', '/ru/orders'] // або всі потрібні маршрути
+    }
   },
   ssr: false,
   app: {
@@ -102,7 +105,8 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "i18n_redirected",
-      redirectOn: "root",
+      alwaysRedirect: true,
+      fallbackLocale: 'uk'
     },
   },
   sitemap: {

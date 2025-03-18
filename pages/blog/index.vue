@@ -215,7 +215,7 @@ useHead({
     {
       rel: 'icon',
       type: 'image/ico',
-      href: '/_favicon.ico'
+      href: '/favicon.ico'
     }
   ]
 });
