@@ -40,7 +40,7 @@ const formatDate = (isoDate: string) => {
     <div class="flex flex-col md:flex-row lg:flex-row items-start justify-around p-4 gap-4 w-full h-[70vh] md:h-full lg:h-full overflow-y-auto md:overflow-hidden lg:overflow-hidden">
       <div class="flex flex-col justify-between w-full gap-4 p-6 h-auto sm:border-b md:border-r lg:border-r">
         <div class="flex flex-col md:flex-row lg:flex-row justify-around items-center gap-4 w-full">
-          <div class="flex flex-col w-full h-full max-w-[15vh] max-h-[15vh] rounded-xl shadow-lg border">
+          <div class="flex flex-col w-full h-full max-w-[15vh] max-h-[25vh] rounded-xl shadow-lg border">
             <img
                 class="h-full w-full object-contain rounded-xl"
                 :src="product?.photo_url"
