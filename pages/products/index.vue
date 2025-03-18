@@ -48,6 +48,15 @@ const max_price = ref(0)
 const min_price = ref(0)
 const config = useRuntimeConfig();
 
+const formatDate = (isoDate: string) => {
+  const date = new Date(isoDate);
+  return date.toLocaleDateString(locale.value, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 // Динамічне обчислення активної категорії
 const selectedCategory = computed(() => {
   return categories.value.find((cat) => cat.id === selectedCategoryId.value);
@@ -172,7 +181,7 @@ const applyFilters = () => {
 };
 
 const notFound = computed(() => {
-  return !!((products.value.length === 0 && !loading.value) || searchedName.value !== "" || min_price.value || max_price.value && selectedCategory.value || selectedSubcategoryId.value);
+  return !!((products.value.length === 0 && !loading.value) || (searchedName.value !== "" && min_price.value && max_price.value && selectedCategory.value && selectedSubcategoryId.value));
 })
 
 onMounted(async () => {
@@ -215,7 +224,7 @@ onBeforeUnmount(() => {
   >
     <!-- Фільтри -->
     <aside
-      class="w-full min-w-[30vh] max-w-[30vh] bg-white p-6 rounded-xl shadow-lg border h-auto flex flex-col min-h-screen justify-between items-center"
+      class="w-full min-w-[30vh] max-w-[30vh] bg-white p-6 rounded-xl shadow-lg border h-full flex flex-col justify-between items-center"
     >
       <div class="w-full flex flex-col items-center gap-2">
         <h2 class="text-xl font-semibold mb-4">{{ t("product-filters-title") }}</h2>
@@ -359,6 +368,7 @@ onBeforeUnmount(() => {
               <ProductCard
                   :product="product"
                   :show-drawer="true"
+                  :is-main-page="false"
               />
             </div>
           </div>

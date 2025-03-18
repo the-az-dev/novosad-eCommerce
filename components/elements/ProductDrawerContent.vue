@@ -22,6 +22,15 @@ const { t } = useI18n();
 const description = computed(() => {
   return DOMPurify.sanitize(product?.description.replace(/\\r\\n/g, "<br>"));
 });
+
+const formatDate = (isoDate: string) => {
+  const date = new Date(isoDate);
+  return date.toLocaleDateString(locale.value, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
 </script>
 
 <template>
@@ -47,11 +56,14 @@ const description = computed(() => {
                 ID: {{ product?.id }}
               </Label>
             </div>
-            <div class="flex flex-row items-center gap-2 w-full">
-              <Label class="text-md">Ціна:</Label>
-              <Label class="text-md"
-              >{{ product?.price }} грн.</Label
-              >
+            <div class="flex flex-row items-center justify-between gap-2 w-full">
+              <div class="flex flex-row gap-2">
+                <Label class="text-md">Ціна:</Label>
+                <Label class="text-md"
+                >{{ product?.price }} грн.</Label
+                >
+              </div>
+              <Label class="">{{ t("product-item-info-delivery-date")}} {{ product?.delivery_at }}  </Label>
             </div>
 
           </div>

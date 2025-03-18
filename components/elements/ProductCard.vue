@@ -51,6 +51,11 @@ const props = defineProps({
     type: String,
     required: false,
     default: '#',
+  },
+  isMainPage: {
+    type: Boolean,
+    required: true,
+    default: false,
   }
 });
 
@@ -59,7 +64,8 @@ const { product } = props;
 
 <template>
   <Card
-    class="w-full max-w-[320px] min-w-[120px] h-full min-h-[380px] max-h-[380px] shadow-lg border border-gray-300 rounded-xl bg-white opacity-0 animate-fade-up"
+    class="w-full max-w-[320px] h-full min-h-[380px] max-h-[380px] shadow-lg border border-gray-300 rounded-xl bg-white opacity-0 animate-fade-up"
+    :style="{ 'min-width': isMainPage ? '120px' : '320px' }"
   >
     <CardHeader
       class="h-48 bg-gray-100 flex items-center justify-center rounded-t-lg overflow-hidden"
@@ -82,7 +88,7 @@ const { product } = props;
         >
       </CardDescription>
       <CardTitle
-          class="text-lg font-semibold text-gray-900 w-full line-clamp-none
+          class="text-md font-semibold text-gray-900 w-full line-clamp-none
             h-full min-h-[5vh] max-h-[5vh] relative z-[999]"
       >
         {{ product?.name }}
