@@ -54,11 +54,20 @@ useHead({
 
 
 <template>
-  <Toaster/>
 
-  <div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </div>
+  <NuxtLayout>
+    <Toaster/>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
+
+<style lang="css">
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+</style>

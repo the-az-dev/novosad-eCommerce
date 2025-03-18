@@ -27,13 +27,13 @@ const steps = [
 </script>
 
 <template>
-  <div class="max-h-[70vh] w-full flex flex-col items-center justify-start gap-14 p-8">
-    <div>
+  <div class="h-full w-full flex flex-col items-center justify-start gap-14 px-[calc(40%-7rem)] md:px-8 lg:px-8 py-8">
+    <div class="flex flex-col items-center justify-start">
       <Label class="text-3xl font-semibold text-center">
         {{ t("stepper-header") }}
       </Label>
     </div>
-    <div class="flex flex-row items-stretch justify-between w-full gap-8">
+    <div class="flex flex-col md:flex-row lg:flex-row items-stretch justify-between w-full gap-8">
       <div 
         v-for="(item, index) in steps"
         :key="item.step"
