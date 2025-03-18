@@ -17,7 +17,7 @@ const props = defineProps({
 });
 
 const { product } = props;
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const description = computed(() => {
   return DOMPurify.sanitize(product?.description.replace(/\\r\\n/g, "<br>"));
