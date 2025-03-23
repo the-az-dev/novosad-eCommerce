@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novosad - Високоякісний посадковий матеріал</title>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="top-bar">
+        <div class="logo">
+          <div class="logo-icon">N</div>
+          <div class="logo-text">NOVO<span>SAD</span></div>
+        </div>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>+38 (050) 036 32 90</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div>+38 (068) 065 40 11 (viber)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <div class="container">
+        <ul class="nav-list">
+          <li><a href="#" class="nav-item"><span class="nav-icon">🏠</span> Головна</a></li>
+          <li><a href="#" class="nav-item"><span class="nav-icon">🌱</span> Каталог товарів</a></li>
+          <li><a href="#" class="nav-item"><span class="nav-icon">📝</span> Блог</a></li>
+          <li><a href="#" class="nav-item"><span class="nav-icon">📞</span> Контакти</a></li>
+          <li><a href="#" class="nav-item"><span class="nav-icon">🚚</span> Замовлення та доставка</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tagline">Європейський посадковий матеріал</div>
+        <h1 class="hero-title">Ласкаво просимо у світ <span>Novosad</span></h1>
+        <p class="hero-text">
+          Фірма Novosad постачає високоякісний посадковий матеріал плодово-ягідних рослин з елітних розсадників Європи. Наші саджанці відрізняються генетичною чистотою та стійкістю до захворювань, що є запорукою вашого гарантованого врожаю.
+        </p>
+        <div class="buttons">
+          <a href="#" class="btn btn-primary">Каталог товарів</a>
+          <a href="#" class="btn btn-outline">Дізнатися більше</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">Чому обирають нас</div>
+        <h2 class="section-title">Наші переваги</h2>
+        <p class="section-description">Ми спеціалізуємося на постачанні найякіснішого посадкового матеріалу для вашого саду та городу</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌱</div>
+          <h3 class="feature-title">Європейська якість</h3>
+          <p class="feature-text">Посадковий матеріал з елітних розсадників Польщі, Голландії та Німеччини</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-title">Здорові саджанці</h3>
+          <p class="feature-text">Генетично чисті саджанці без хронічних захворювань</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3 class="feature-title">Адаптовані рослини</h3>
+          <p class="feature-text">Вирощені в кліматичних умовах, аналогічних українським</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3 class="feature-title">Консультації</h3>
+          <p class="feature-text">Професійні поради з вирощування та догляду за рослинами</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">Наш асортимент</div>
+        <h2 class="section-title">Категорії товарів</h2>
+        <p class="section-description">Різноманітний вибір посадкового матеріалу для вашого саду</p>
+      </div>
+      <div class="categories-grid">
+        <a href="#" class="category-card">
+          <div class="category-image">
+            <img src="/api/placeholder/400/300" alt="Саджанці ягід">
+            <div class="category-overlay"></div>
+          </div>
+          <div class="category-content">
+            <h3 class="category-title">Саджанці ягід</h3>
+            <div class="category-count">12 товарів</div>
+            <div class="category-link">Переглянути каталог →</div>
+          </div>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-image">
+            <img src="/api/placeholder/400/300" alt="Плодові дерева">
+            <div class="category-overlay"></div>
+          </div>
+          <div class="category-content">
+            <h3 class="category-title">Плодові дерева</h3>
+            <div class="category-count">8 товарів</div>
+            <div class="category-link">Переглянути каталог →</div>
+          </div>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-image">
+            <img src="/api/placeholder/400/300" alt="Добрива">
+            <div class="category-overlay"></div>
+          </div>
+          <div class="category-content">
+            <h3 class="category-title">Добрива</h3>
+            <div class="category-count">5 товарів</div>
+            <div class="category-link">Переглянути каталог →</div>
+          </div>
+        </a>
+        <a href="#" class="category-card">
+          <div class="category-image">
+            <img src="/api/placeholder/400/300" alt="Опори для рослин">
+            <div class="category-overlay"></div>
+          </div>
+          <div class="category-content">
+            <h3 class="category-title">Опори для рослин</h3>
+            <div class="category-count">6 товарів</div>
+            <div class="category-link">Переглянути каталог →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-tagline">Спеціальна пропозиція</div>
+        <h2 class="cta-title">Отримайте знижку 10% на перше замовлення</h2>
+        <p class="cta-text">Зареєструйтесь на нашому сайті та отримайте знижку 10% на перше замовлення. Також ви отримаєте доступ до ексклюзивних пропозицій та корисних порад з догляду за рослинами.</p>
+        <a href="#" class="btn btn-cta">Отримати знижку</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-column footer-about">
+          <h3>Про Novosad</h3>
+          <p>Фірма Novosad спеціалізується на постачанні високоякісного посадкового матеріалу плодово-ягідних рослин з елітних розсадників Європи.</p>
+          <p>Ми пропонуємо широкий асортимент рослин, адаптованих до українського клімату.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Корисні посилання</h3>
+          <ul class="footer-links">
+            <li><a href="#">Головна</a></li>
+            <li><a href="#">Каталог товарів</a></li>
+            <li><a href="#">Про компанію</a></li>
+            <li><a href="#">Блог</a></li>
+            <li><a href="#">Контакти</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Категорії</h3>
+          <ul class="footer-links">
+            <li><a href="#">Саджанці ягід</a></li>
+            <li><a href="#">Плодові дерева</a></li>
+            <li><a href="#">Добрива</a></li>
+            <li><a href="#">Опори для рослин</a></li>
+            <li><a href="#">Підщепа</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Контакти</h3>
+          <ul class="footer-contact">
+            <li>
+              <span class="footer-contact-icon">📱</span>
+              <span>+38 (050) 036 32 90</span>
+            </li>
+            <li>
+              <span class="footer-contact-icon">💬</span>
+              <span>+38 (068) 065 40 11 (viber)</span>
+            </li>
+            <li>
+              <span class="footer-contact-icon">📧</span>
+              <span>info@novosad.pp.ua</span>
+            </li>
+            <li>
+              <span class="footer-contact-icon">🏠</span>
+              <span>м. Львів, Україна</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2025 Novosad. Всі права захищені.</div>
+        <div class="footer-social">
+          <a href="#" class="social-icon">f</a>
+          <a href="#" class="social-icon">t</a>
+          <a href="#" class="social-icon">in</a>
+          <a href="#" class="social-icon">i</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
