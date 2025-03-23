@@ -61,7 +61,7 @@ useHead({
   </NuxtLayout>
 </template>
 
-<style lang="css">
+<style>
 
 html, body {
   margin: 0;
