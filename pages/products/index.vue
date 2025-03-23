@@ -25,6 +25,7 @@ import { useI18n } from "vue-i18n";
 import { useSeoMeta, useHead, useLazyFetch, useLocalePath } from "#imports";
 import ProductCard from "~/components/elements/ProductCard.vue";
 import ProductCardSkeleton from "~/components/elements/ProductCardSkeleton.vue";
+import {useRuntimeConfig} from "nuxt/app";
 
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
@@ -237,11 +238,6 @@ useHead({
       href: '/favicon.ico'
     }
   ],
-  meta: {
-    charset: 'utf-8',
-    httpEquiv: 'refresh',
-  }
-}
 });
 </script>
 
